@@ -281,13 +281,30 @@ $.getJSON("data/poles.geojson", function (data) {
 var pmu_ppu = L.geoJson(null, {
   onEachFeature: function (feature, layer) {
     if (feature.properties) {
-      var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + feature.properties.name + "</td></tr>" + "<tr><th>Type</th><td>" + feature.properties.type + "</td></tr>"  + "<table>";
+      var content = 
+      "<table class='table table-striped table-bordered table-condensed'>" +
+      "<tbody >"+
+      "<tr><th>Name</th><td>" + feature.properties.name + "</td></tr>" + "<tr><th>Type</th><td>" + feature.properties.type + "</td></tr>"  +
+      "<tr><th>submission</th><td> "+feature.properties.submission+"</td></tr>"+
+      "<tr><th>transformer</th><td> "+feature.properties.transformer+"</td></tr>"+
+      "<tr><th>sub_grid</th><td> "+feature.properties.sub_grid+"</td></tr>"+
+      "<tr><th>cb</th><td> "+feature.properties.cb+"</td></tr>"+
+      "<tr><th>rmu</th><td> "+feature.properties.rmu+"</td></tr>"+
+      "<tr><th>ner</th><td> "+feature.properties.ner+"</td></tr>"+
+      "<tr><th>lvdb</th><td> "+feature.properties.lvdb+"</td></tr>"+
+      "<tr><th>fp</th><td> "+feature.properties.fp+"</td></tr>"+
+      "</tbody>"+
+       "<table>";
+             // "<p><a data-toggle='collapse' role='button' href='#collapseExample' aria-expanded='true' aria-controls='collapseExample'><i class='fa fa-plus' style='cursor: pointer;'></i></a></p>"+
+
       layer.on({
         click: function (e) {
-          $("#feature-title").html(feature.properties.name);
-          $("#feature-info").html(content);
-          $("#featureModal").modal("show");
-          highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
+          $("#pmu_ppu").html("<h4> <i class='fa fa-plus' id='iconp' onclick='toggleDivp()'></i> pmu_ppu details</h4><div id='pmu'>"+content+'</div>');
+          $("#pmu_ppu_con").html("<h4> <i class='fa fa-plus' id='icon' onclick='toggleDivc()'></i> Connectivity of pmu&ppu</h4><div id='con'>"+content+"</div>");
+   //       $("#feature-title").html(feature.properties.name);
+     //     $("#feature-info").html(content);
+       //   $("#featureModal").modal("show");
+         // highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
         }
       });
     }
@@ -596,3 +613,57 @@ if (!L.Browser.touch) {
 } else {
   L.DomEvent.disableClickPropagation(container);
 }
+
+function toggleDivp(){
+
+
+ var content = document.getElementById("pmu");
+ var icon = document.getElementById("iconp");
+ // consloe.log(content);
+  if (content.style.display === "none") {
+      content.style.display = "block";
+       icon.classList.add('fa-plus');
+      icon.classList.remove('fa-minus');
+
+    } else {
+      content.style.display = "none";
+      icon.classList.remove('fa-plus');
+      icon.classList.add('fa-minus');
+    }
+}
+
+
+function toggleDivc(){
+
+
+ var content =document.getElementById("con") ;
+ var icon = document.getElementById("icon");
+ // consloe.log(content);
+  if (content.style.display === "none") {
+      content.style.display = "block";
+      icon.classList.add('fa-plus');
+      icon.classList.remove('fa-minus');
+    } else {
+      content.style.display = "none";
+      icon.classList.remove('fa-plus');
+      icon.classList.add('fa-minus');
+    }
+    
+}
+
+
+
+// var coll = document.getElementsByClassName("collapsible");
+// var i;
+
+// for (i = 0; i < coll.length; i++) {
+//   coll[i].addEventListener("click", function() {
+//     this.classList.toggle("active");
+//     var content = this.nextElementSibling;
+//     if (content.style.display === "none") {
+//       content.style.display = "block";
+//     } else {
+//       content.style.display = "none";
+//     }
+//   });
+// }
