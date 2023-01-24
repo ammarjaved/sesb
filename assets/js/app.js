@@ -295,12 +295,25 @@ var pmu_ppu = L.geoJson(null, {
       "<tr><th>FP</th><td> "+feature.properties.fp+"</td></tr>"+
       "</tbody>"+
        "<table>";
+
+       var content2 = 
+      "<table class='table table-striped table-bordered table-condensed'>" +
+      "<tbody >"+
+      "<tr><th>Id</th><td></td>"+ feature.properties.id + "</tr>" +
+      "<tr><th>From</th><td> </td></tr>"+
+      "<tr><th>To</th><td> </td></tr>"+
+      "</tbody>"+
+       "<table>";
+
              // "<p><a data-toggle='collapse' role='button' href='#collapseExample' aria-expanded='true' aria-controls='collapseExample'><i class='fa fa-plus' style='cursor: pointer;'></i></a></p>"+
 
       layer.on({
         click: function (e) {
           $("#pmu_ppu").html("<h4> <i class='fa fa-plus' id='iconp' onclick='toggleDivp()'></i> pmu_ppu details</h4><div id='pmu'>"+content+'</div>');
-          $("#pmu_ppu_con").html("<h4> <i class='fa fa-plus' id='icon' onclick='toggleDivc()'></i> Connectivity of pmu&ppu</h4><div id='con'>"+content+"</div>");
+          $("#pmu_ppu_con").html("<h4> <i class='fa fa-plus' id='icon' onclick='toggleDivc()'></i> Connectivity of pmu&ppu</h4><div id='con'>"+content2+"</div>");
+    //       var marker = new L.Marker([51.509, -0.08]);
+    // marker.addTo(map);
+    // marker.valueOf()._icon.style.Color = 'red';
    //       $("#feature-title").html(feature.properties.name);
      //     $("#feature-info").html(content);
        //   $("#featureModal").modal("show");
