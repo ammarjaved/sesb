@@ -285,14 +285,14 @@ var pmu_ppu = L.geoJson(null, {
       "<table class='table table-striped table-bordered table-condensed'>" +
       "<tbody >"+
       "<tr><th>Name</th><td>" + feature.properties.name + "</td></tr>" + "<tr><th>Type</th><td>" + feature.properties.type + "</td></tr>"  +
-      "<tr><th>submission</th><td> "+feature.properties.submission+"</td></tr>"+
-      "<tr><th>transformer</th><td> "+feature.properties.transformer+"</td></tr>"+
-      "<tr><th>sub_grid</th><td> "+feature.properties.sub_grid+"</td></tr>"+
-      "<tr><th>cb</th><td> "+feature.properties.cb+"</td></tr>"+
-      "<tr><th>rmu</th><td> "+feature.properties.rmu+"</td></tr>"+
-      "<tr><th>ner</th><td> "+feature.properties.ner+"</td></tr>"+
-      "<tr><th>lvdb</th><td> "+feature.properties.lvdb+"</td></tr>"+
-      "<tr><th>fp</th><td> "+feature.properties.fp+"</td></tr>"+
+      "<tr><th>Submission</th><td> "+feature.properties.submission+"</td></tr>"+
+      "<tr><th>Transformer</th><td> "+feature.properties.transformer+"</td></tr>"+
+      "<tr><th>Sub Grid</th><td> "+feature.properties.sub_grid+"</td></tr>"+
+      "<tr><th>CB</th><td> "+feature.properties.cb+"</td></tr>"+
+      "<tr><th>RMU</th><td> "+feature.properties.rmu+"</td></tr>"+
+      "<tr><th>NER</th><td> "+feature.properties.ner+"</td></tr>"+
+      "<tr><th>LVDB</th><td> "+feature.properties.lvdb+"</td></tr>"+
+      "<tr><th>FP</th><td> "+feature.properties.fp+"</td></tr>"+
       "</tbody>"+
        "<table>";
              // "<p><a data-toggle='collapse' role='button' href='#collapseExample' aria-expanded='true' aria-controls='collapseExample'><i class='fa fa-plus' style='cursor: pointer;'></i></a></p>"+
