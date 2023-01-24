@@ -317,7 +317,7 @@ var pmu_ppu = L.geoJson(null, {
    //       $("#feature-title").html(feature.properties.name);
      //     $("#feature-info").html(content);
        //   $("#featureModal").modal("show");
-         // highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
+         highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
         }
       });
     }
