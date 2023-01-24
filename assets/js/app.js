@@ -299,7 +299,7 @@ var pmu_ppu = L.geoJson(null, {
        var content2 = 
       "<table class='table table-striped table-bordered table-condensed'>" +
       "<tbody >"+
-      "<tr><th>Id</th><td></td>"+ feature.properties.id + "</tr>" +
+      "<tr><th>Id</th><td>"+ feature.properties.id + "</td></tr>" +
       "<tr><th>From</th><td> </td></tr>"+
       "<tr><th>To</th><td> </td></tr>"+
       "</tbody>"+
