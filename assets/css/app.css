@@ -9,12 +9,32 @@ body {
 input[type="radio"], input[type="checkbox"] {
   margin: 0;
 }
+
+li{
+  list-style: none;
+  margin-left: 0px;
+  cursor: pointer;
+}
+ul{
+  padding: 0px;
+}
+
+#nested_substation{
+padding: 15px;
+}
+
 #sidebar {
   display: block;
   width: 250px;
   height: 100%;
   max-width: 100%;
   float: left;
+  overflow-x: hidden;
+}
+
+.fa.fa-plus, .fa.fa-minus{
+  cursor: pointer;
+  margin: 0px 6px;
 }
 #map {
   width: auto;
@@ -65,9 +85,9 @@ input[type="radio"], input[type="checkbox"] {
   position: relative;
 }
 .sidebar-table {
-  position: absolute;
+/*  position: absolute;*/
   width: 100%;
-  top: 103px;
+/*  top: 103px;*/
   bottom: 0px;
   overflow: auto;
 }
@@ -155,6 +175,7 @@ input[type="radio"], input[type="checkbox"] {
 @media (max-width: 767px){
   #sidebar {
     display: none;
+
   }
   .url-break {
     word-break: break-all;
