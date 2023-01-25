@@ -627,21 +627,22 @@ if (!L.Browser.touch) {
   L.DomEvent.disableClickPropagation(container);
 }
 
-function toggleDivp(){
+function toggleDivp(id){
 
 
- var content = document.getElementById("pmu");
- var icon = document.getElementById("iconp");
+ var content = document.getElementById(id);
+ // var icon = document.getElementById("iconp");
  // consloe.log(content);
+ console.log(id);
   if (content.style.display === "none") {
       content.style.display = "block";
-       icon.classList.add('fa-plus');
-      icon.classList.remove('fa-minus');
+      //  icon.classList.add('fa-plus');
+      // icon.classList.remove('fa-minus');
 
     } else {
       content.style.display = "none";
-      icon.classList.remove('fa-plus');
-      icon.classList.add('fa-minus');
+      // icon.classList.remove('fa-plus');
+      // icon.classList.add('fa-minus');
     }
 }
 
