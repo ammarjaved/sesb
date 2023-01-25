@@ -646,20 +646,20 @@ function toggleDivp(){
 }
 
 
-function toggleDivc(){
+function toggleDiv(){
+alert("Sdfsdf");
 
-
- var content =document.getElementById("con") ;
- var icon = document.getElementById("icon");
+ var content =document.getElementById("nested_substation") ;
+ // var icon = document.getElementById("icon");
  // consloe.log(content);
   if (content.style.display === "none") {
       content.style.display = "block";
-      icon.classList.add('fa-plus');
-      icon.classList.remove('fa-minus');
+      // icon.classList.add('fa-plus');
+      // icon.classList.remove('fa-minus');
     } else {
       content.style.display = "none";
-      icon.classList.remove('fa-plus');
-      icon.classList.add('fa-minus');
+      // icon.classList.remove('fa-plus');
+      // icon.classList.add('fa-minus');
     }
     
 }

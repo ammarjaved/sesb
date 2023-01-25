@@ -10,12 +10,17 @@ input[type="radio"], input[type="checkbox"] {
   margin: 0;
 }
 
-.list{
+li{
   list-style: none;
   margin-left: 0px;
+  cursor: pointer;
 }
 ul{
   padding: 0px;
+}
+
+#nested_substation{
+padding: 15px;
 }
 
 #sidebar {
