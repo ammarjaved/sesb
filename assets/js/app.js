@@ -627,57 +627,62 @@ if (!L.Browser.touch) {
   L.DomEvent.disableClickPropagation(container);
 }
 
+
+var nest ="" ,nest_i="", ddiv="",ddiv_i="";
+
 function toggleDivp(id){
 
 
  var content = document.getElementById(id);
- // var icon = document.getElementById("iconp");
- // consloe.log(content);
- console.log(id);
+ var icon = document.getElementById(id+"_i");
+
   if (content.style.display === "none") {
+    if (nest !== "") {
+      nest.style.display = "none";
+      nest_i.classList.add('fa-plus');
+      nest_i.classList.remove('fa-minus');
+    }
       content.style.display = "block";
-      //  icon.classList.add('fa-plus');
-      // icon.classList.remove('fa-minus');
+       icon.classList.remove('fa-plus');
+      icon.classList.add('fa-minus');
+      nest = content;
+      nest_i = icon;
 
     } else {
       content.style.display = "none";
-      // icon.classList.remove('fa-plus');
-      // icon.classList.add('fa-minus');
+      icon.classList.add('fa-plus');
+      icon.classList.remove('fa-minus');
+      nest = "";
     }
-}
 
-
-function toggleDiv(){
-alert("Sdfsdf");
-
- var content =document.getElementById("nested_substation") ;
- // var icon = document.getElementById("icon");
- // consloe.log(content);
-  if (content.style.display === "none") {
-      content.style.display = "block";
-      // icon.classList.add('fa-plus');
-      // icon.classList.remove('fa-minus');
-    } else {
-      content.style.display = "none";
-      // icon.classList.remove('fa-plus');
-      // icon.classList.add('fa-minus');
-    }
     
 }
 
 
+function toggleDiv(id){
 
-// var coll = document.getElementsByClassName("collapsible");
-// var i;
+ var content =document.getElementById(id) ;
+ var icon = document.getElementById(id+"_i");
 
-// for (i = 0; i < coll.length; i++) {
-//   coll[i].addEventListener("click", function() {
-//     this.classList.toggle("active");
-//     var content = this.nextElementSibling;
-//     if (content.style.display === "none") {
-//       content.style.display = "block";
-//     } else {
-//       content.style.display = "none";
-//     }
-//   });
-// }
+  if (content.style.display === "none") {
+if (ddiv !== "") {
+      ddiv.style.display = "none";
+      ddiv_i.classList.add('fa-plus');
+      ddiv_i.classList.remove('fa-minus');
+    }
+
+      content.style.display = "block";
+      icon.classList.remove('fa-plus');
+      icon.classList.add('fa-minus');
+      ddiv = content;
+      ddiv_i = icon;
+    } else {
+      content.style.display = "none";
+      icon.classList.remove('fa-minus');
+      icon.classList.add('fa-plus');
+      ddiv = "";
+  
+    }
+    
+}
+
