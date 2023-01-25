@@ -210,9 +210,9 @@ style:myStyle,
       var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + feature.properties.NAME + "</td></tr>" + "<tr><th>Phone</th><td>" + feature.properties.TEL + "</td></tr>" + "<tr><th>Address</th><td>" + feature.properties.ADDRESS1 + "</td></tr>" + "<tr><th>Website</th><td><a class='url-break' href='" + feature.properties.URL + "' target='_blank'>" + feature.properties.URL + "</a></td></tr>" + "<table>";
       layer.on({
         click: function (e) {
-          $("#feature-title").html(feature.properties.NAME);
-          $("#feature-info").html(content);
-          $("#featureModal").modal("show");
+          // $("#feature-title").html(feature.properties.NAME);
+          // $("#feature-info").html(content);
+          // $("#featureModal").modal("show");
           highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
         }
       });
@@ -309,8 +309,12 @@ var pmu_ppu = L.geoJson(null, {
 
       layer.on({
         click: function (e) {
-          $("#pmu_ppu").html("<h4> <i class='fa fa-plus' id='iconp' onclick='toggleDivp()'></i> pmu_ppu details</h4><div id='pmu'>"+content+'</div>');
-          $("#pmu_ppu_con").html("<h4> <i class='fa fa-plus' id='icon' onclick='toggleDivc()'></i> Connectivity of pmu&ppu</h4><div id='con'>"+content2+"</div>");
+          let main = document.getElementById('sidebar-table');
+          if (main.style.display === "none") {
+            main.style.display="block";
+          }
+          // $("#pmu_ppu").html("<h4> <i class='fa fa-plus' id='iconp' onclick='toggleDivp()'></i> pmu_ppu details</h4><div id='pmu'>"+content+'</div>');
+          // $("#pmu_ppu_con").html("<h4> <i class='fa fa-plus' id='icon' onclick='toggleDivc()'></i> Connectivity of pmu&ppu</h4><div id='con'>"+content2+"</div>");
     //       var marker = new L.Marker([51.509, -0.08]);
     // marker.addTo(map);
     // marker.valueOf()._icon.style.Color = 'red';
