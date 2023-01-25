@@ -80,33 +80,1269 @@
               <button type="button" class="btn btn-xs btn-default pull-right" id="sidebar-hide-btn"><i class="fa fa-chevron-left"></i></button></h3>
             </div>
 
-            <div class="sidebar-table" >
+            <div class="sidebar-table" id="sidebar-table" style="display:none;">
                <!--  <div id="pmu_ppu"></div>
 
                 <div id="pmu_ppu_con"></div> -->
 
-              <div>
+              <div >
                 <ul>
-                  <li><i class="fa fa-plus" id="iconp" onclick="toggleDiv()"></i> Substation info</li>
+                  <li onclick="toggleDiv('nested_substation')"><i class="fa fa-plus" id="nested_substation_i"></i> Substation info</li>
                     <ul id="nested_substation" style="display: none;">
-                      <li><i class="fa fa-plus" id="iconp" onclick="toggleDivp()"></i>Substation</li>
-                      <li><i class="fa fa-plus" id="iconp" onclick="toggleDivp()"></i>Transformer</li>
-                      <li><i class="fa fa-plus" id="iconp" onclick="toggleDivp()"></i>Switchgear</li>
-                      <li><i class="fa fa-plus" id="iconp" onclick="toggleDivp()"></i>Circuit Breaker</li>
-                      <li><i class="fa fa-plus" id="iconp" onclick="toggleDivp()"></i>RMU</li>
-                      <li><i class="fa fa-plus" id="iconp" onclick="toggleDivp()"></i>NER</li>
-                      <li><i class="fa fa-plus" id="iconp" onclick="toggleDivp()"></i>LVDB</li>
-                      <li><i class="fa fa-plus" id="iconp" onclick="toggleDivp()"></i>Feeder Pillar</li>
-                      <li><i class="fa fa-plus" id="iconp" onclick="toggleDivp()"></i>Battery</li>
-                      <li><i class="fa fa-plus" id="iconp" onclick="toggleDivp()"></i>Protection Relay</li>
-                      <li><i class="fa fa-plus" id="iconp" onclick="toggleDivp()"></i>Compact Sub</li>
-                      <li><i class="fa fa-plus" id="iconp" onclick="toggleDivp()"></i>Capacitor Bank</li>
-                      <li><i class="fa fa-plus" id="iconp" onclick="toggleDivp()"></i>Building</li>
-                      <li><i class="fa fa-plus" id="iconp" onclick="toggleDivp()"></i>Fire Protection</li>
+
+                      <li  onclick="toggleDivp('substation')"><i class="fa fa-plus" id="substation_i"></i>Substation</li>
+                        <table class="table table-striped table-bordered table-condensed " id="substation" style="display:none;">
+                          <tr>
+                            <th>p_id</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Bil</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Functional Location</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Description of Functional Location</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Category</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>System Status</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>FL Object Type</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>EQP Object Type</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Cost Center</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Business Area</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Planner Group</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Main Workcenter</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Inventory No</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Size/Dimension</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Start-up date</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>AuthorizGroup</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Weight</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>AcquistnValue </th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Acquistion date  </th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Manufacturer </th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Model number  </th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>ManufPartNo</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>ManufSerialNo</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>ManufCountry </th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Constr.mth</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Constr.yr</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>D_SUBSTATION</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>SUBSTATION TYPE</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>SUBSTATION EARTHING (Ohm)SOURCE OF SUPPLY (SUBSTATION)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>SOURCE OF SUPPLY (SUBSTATION)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>FEEDER NUMBER</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>VOLTAGE IN/OUT (kV)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>SWITCH QUANTITY</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>TRANSFORMER QUANTITY</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>NORMAL OPEN POINT SWITCHGEAR</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th></th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>EFI INSTALLED (YES/NO)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>BUILDING SIZE (m)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>LAND SIZE (m) MAJOR + MINOR</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>MAJOR COMPOUND TYPE</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>MAJOR COMPOUND SIZE (WxL) (m)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>MINOR COMPOUND TYPE</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>MINOR COMPOUND SIZE (WxL) (m)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>SWITCHGEAR TYPE</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>SOURCE OF SUPPLY S/S NAME</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>SOURCE OF SUPPLY SS FEEDER NO.</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>SOURCE OF SUPPLY SS FEEDR VOLT</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>SOURCE OF SUPPLY SS FEEDR NAME</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>SOURCE OF SUPPLY S/S NAME 2</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>SOURCE OF SUPPLY SS FEEDER NO.2</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>SOURCE OF SUPPLY SS FEEDR VOLT 2</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>SOURCE OF SUPPLY SS FEEDR NAME 2</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>SOURCE OF SUPPLY S/S NAME 3</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>SOURCE OF SUPPLY SS FEEDER NO.3</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>SOURCE OF SUPPLY SS FEEDR VOLT 3</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>SOURCE OF SUPPLY SS FEEDR NAME 3</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>SOURCE OF SUPPLY S/S NAME 4</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>SOURCE OF SUPPLY SS FEEDER NO.4</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>SOURCE OF SUPPLY SS FEEDR VOLT 4</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>SOURCE OF SUPPLY SS FEEDR NAME 4</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>TOTAL NO. OF CUSTOMERS</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>TOTAL NO. OF IND. CUSTOMERS</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>TOTAL GAZETTED IND.CUSTOMERS</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>TOTAL  COMMERCIAL CUSTOMERS</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>SCADA FACILITY</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>SUBSTATION SEGMENTATION LEVEL</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>SUBSTATION LOCAL COUNCIL</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>PARLIMENT</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>DEWAN UNDANGAN NEGERI</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>LOCATION NAME FOR INDUSTRY</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>LOCAL COUNCIL NAME</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>WBS NO</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>GPS LONGITUDE</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>GPS LATITUDE</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>GIS GPS COORDINATE(NORTH)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>GIS GPS COORDINATE (EAST)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>GPS COORDINATE ACTUAL(NORTH)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>GPS COORDINATE ACTUAL(EAST)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>NAME IN SCADA</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>ACTUAL NAME ON SITE</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>REMARK</th>
+                            <td>Null</td>
+                          </tr>
+                        </table>
+
+
+
+                      <li onclick="toggleDivp('transformer')"><i class="fa fa-plus" id="transformer_i" ></i>Transformer</li>
+
+
+
+                        <table class="table table-striped table-bordered table-condensed" id="transformer" style="display:none;">
+                          <tr>
+                            <th>p_id</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Equipment</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Equipment Description</th>
+                            <td>Null</td>
+                          </tr>
+
+                          <tr>
+                            <th>Functional Location</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Description of Functional Location</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Category</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>System Status</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>FL Object Type</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>EQP Object Type</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Cost Center</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Business Area</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Planner Group</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Main Workcenter</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>AuthorizGroup</th>
+                            <td>Null</td>
+                          </tr>
+
+                          <tr>
+                            <th>Weight (kg)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Inventory No</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Substation</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Substation Name</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Size/Dimension</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Start-up date</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>AcquistnValue </th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Acquistion date  </th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Manufacturer</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Model number</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>ManufPartNo</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>ManufSerialNo</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>ManufCountry</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Constr.mth</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Constr.yr</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Name</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Street</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Location </th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Telephone </th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Fax</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Begin guarantee</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Master warranty</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Warranty end  </th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>D_TRANSFORMER</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>TRANSFORMER TYPE</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>TRANSFORMER CAPACITY (kVA)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>VOLUME OF OIL (Litre)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>COOLING SYSTEM</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>HV TERMINAL TYPE</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>LV TERMINAL TYPE</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>MAXIMUM I/C VOLTAGE (kV)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>MINIMUM I/C VOLTAGE (kV)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>TYPE OF TAP CHANGER</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>TAPPING RANGE</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>TAP INCREMENT (V)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>TAP POSITION</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>VECTOR GROUP</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>TRANSFORMER GUARD</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>RATED SECONDARY VOLTAGE (V)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>RATED SECONDARY CURRENT (A)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>RATED PRIMARY CURRENT (A)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>IMPEDANCE (%)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>VOLTAGE IN/OUT (kV)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>TOTAL NO. OF CUSTOMERS</th>
+                            <td>Null</td>
+                          </tr>
+
+                          <tr>
+                            <th>TOTAL NO. OF IND. CUSTOMERS</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>TOTAL GAZETTED IND.CUSTOMERS</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>TOTAL  COMMERCIAL CUSTOMERS</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>TOTAL STREET LIGHTING METERS</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>PEAK LOAD (kW)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>LOAD FACTOR</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>1-5</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>1-16</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>REMARK</th>
+                            <td>Null</td>
+                          </tr>
+
+                        </table>
+
+
+                      <li onclick="toggleDivp('switchgear')"><i class="fa fa-plus" id="switchgear_i" ></i>Switchgear</li>
+
+
+                      <table class="table table-striped table-bordered table-condensed " id="switchgear" style="display:none;">
+                          <tr>
+                            <th>p_id</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Equipment</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Functional Location</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Equipment Description</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Description of Functional Location</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Category</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>System Status</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>FL Object Type</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>EQP Object Type</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Cost Center</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Business Area</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Planner Group</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Main Workcenter</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>AuthorizGroup</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Weight (kg)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Inventory No</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Size/Dimension</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Start-up date</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>AcquistnValue </th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Acquistion date  </th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Manufacturer </th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Model number  </th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>ManufPartNo</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>ManufSerialNo</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>ManufCountry </th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Constr.mth</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Constr.yr</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Name</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Street</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Location </th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Telephone </th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Fax</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Begin guarantee</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Master warranty</th>
+                            <td>Null</td>
+                          </tr>
+                         <tr>
+                            <th>Warranty end  </th>
+                            <td>Null</td>
+                          </tr> 
+                          <tr>
+                            <th>D_SWITCHGEAR</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>SWITCH NUMBER</th>
+                            <td>Null</td>
+                          </tr> 
+                          <tr>
+                            <th>DESTINATION (OUTGOING FEEDER)</th>
+                            <td>Null</td>
+                          </tr> 
+                          <tr>
+                            <th>SWITCH TYPE</th>
+                            <td>Null</td>
+                          </tr> 
+                          <tr>
+                            <th>SG EQUIPMENT TYPE</th>
+                            <td>Null</td>
+                          </tr> 
+                          <tr>
+                            <th>RATED VOLTAGE (kV)</th>
+                            <td>Null</td>
+                          </tr> 
+                          <tr>
+                            <th>RATED  CURRENT (A)</th>
+                            <td>Null</td>
+                          </tr> 
+                          <tr>
+                            <th>TYPE OF INSULATION (SGEAR)</th>
+                            <td>Null</td>
+                          </tr> 
+                          <tr>
+                            <th>NORMAL OPEN POINT SWITCHGEAR</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>RATED BREAKING CURRENT (A)</th>
+                            <td>Null</td>
+                          </tr> 
+                          <tr>
+                            <th>RATED FAULT CURRENT (A)</th>
+                            <td>Null</td>
+                          </tr>
+                           <tr>
+                            <th>EXTENSIBLE (Y/N)</th>
+                            <td>Null</td>
+                          </tr>
+                           <tr>
+                            <th>FUSE LENGTH</th>
+                            <td>Null</td>
+                          </tr>
+                           <tr>
+                            <th>EFI INSTALLED (YES/NO)</th>
+                            <td>Null</td>
+                          </tr>
+                           <tr>
+                            <th>REMARK</th>
+                            <td>Null</td>
+                          </tr>
+                      </table>
+
+                      <li onclick="toggleDivp('circuit')"><i class="fa fa-plus" id="circuit_i" ></i>Circuit Breaker</li>
+
+
+                      <table class="table table-striped table-bordered table-condensed deactive" id="circuit">
+                          <tr>
+                            <th>p_id</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Equipment</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Functional Location</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Equipment Description</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Description of Functional Location</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Category</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>System Status</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>FL Object Type</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>EQP Object Type</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Cost Center</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Business Area</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Planner Group</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Main Workcenter</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>AuthorizGroup</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Weight (kg)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Inventory No</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Size/Dimension</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Start-up date</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>AcquistnValue </th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Acquistion date  </th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Manufacturer </th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Model number  </th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>ManufPartNo</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>ManufSerialNo</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>ManufCountry </th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Constr.mth</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Constr.yr</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Name</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Street</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Location </th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Telephone </th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Fax</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Begin guarantee</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Master warranty</th>
+                            <td>Null</td>
+                          </tr>
+                         <tr>
+                            <th>Warranty end  </th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>D_CIRCUIT_BREAKER</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>BREAKER NUMBER</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>DESTINATION (OUTGOING FEEDER)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>BREAKER TYPE</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>RATED VOLTAGE (kV)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>RATED CURRENT (A)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>TYPE OF INSULATION (BREAKER)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>BREAKING CAPACITY (kA)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>RATED FAULT CURRENT (A)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>NUMBER OF BUSBAR</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>NORMAL STATUS</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>VT SIZE (V)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>CT RATIO (A)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>RELAY TYPE</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>EFI INSTALLED</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>CB TRUCK S/N</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>LAST DATE MAINTAIN</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>REMARK</th>
+                            <td>Null</td>
+                          </tr>
+                        </table>
+
+                      <li onclick="toggleDivp('rmu')"><i class="fa fa-plus" id="rmu_i" ></i>RMU</li>
+                      <h6 id="rmu" style="display:none;"></h6 >
+
+
+                      <li onclick="toggleDivp('ner')"><i class="fa fa-plus" id="ner_i"></i>NER</li>
+
+
+                      <table class="table table-striped table-bordered table-condensed " id="ner" style="display:none;">
+                          <tr>
+                            <th>p_id</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Equipment</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Functional Location</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Equipment Description</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Description of Functional Location</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Category</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>System Status</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>FL Object Type</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>EQP Object Type</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Cost Center</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Business Area</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Planner Group</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Main Workcenter</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>AuthorizGroup</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Weight (kg)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Inventory No</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Size/Dimension</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Start-up date</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>AcquistnValue </th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Acquistion date  </th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Manufacturer </th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Model number  </th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>ManufPartNo</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>ManufSerialNo</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>ManufCountry </th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Constr.mth</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Constr.yr</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Name</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Street</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Location </th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Telephone </th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Fax</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Begin guarantee</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>Master warranty</th>
+                            <td>Null</td>
+                          </tr>
+                         <tr>
+                            <th>Warranty end  </th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>D_NER</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>NER TYPE</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>RESISTANCE VALUE (Ohm)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>VOLTAGE LEVEL (kV)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>CURRENT RATING (A)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>NEUTRAL EARTH ISOLATOR (NEI) BUSBAR SIZE (mm2)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>SHORT CIRCUIT CURRENT (NEI) (kA)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>NEUTRAL EARTH ISOLATOR (NEI) RATED VOLTAGE (kV)</th>
+                            <td>Null</td>
+                          </tr>
+                          <tr>
+                            <th>REMARK</th>
+                            <td>Null</td>
+                          </tr>
+                        </table>
+                      <li onclick="toggleDivp('lvdb')"><i class="fa fa-plus" id="lvdb_i" ></i>LVDB</li>
+                      <h6 id="lvdb" style="display:none;"></h6 >
+
+                      <li onclick="toggleDivp('fedeer')"><i class="fa fa-plus" id="fedeer_i"></i>Fedeer Pillar</li>
+                      <h6 id="fedeer" style="display:none;"></h6 >
+
+                      <li onclick="toggleDivp('battery')"><i class="fa fa-plus" id="battery_i"></i>Battery</li>
+                      <h6 id="battery" style="display:none;"></h6 >
+
+                      <li onclick="toggleDivp('Protection')"><i class="fa fa-plus" id="Protection_i"></i>Protection Relay</li>
+                      <h6 id="Protection" style="display:none;"></h6 >
+
+                      <li onclick="toggleDivp('Compact')"><i class="fa fa-plus" id="Compact_i"></i>Compact Sub</li>
+                      <h6 id="Compact" style="display:none;"></h6 >
+
+                      <li onclick="toggleDivp('Capacitor')"><i class="fa fa-plus" id="Capacitor_i"></i>Capacitor Bank</li>
+                      <h6 id="Capacitor" style="display:none;"></h6 >
+
+                      <li onclick="toggleDivp('Building')"><i class="fa fa-plus" id="Building_i"></i>Building</li>
+                      <h6 id="Building" style="display:none;"></h6 >
+
+                      <li onclick="toggleDivp('Fire')"><i class="fa fa-plus" id="Fire_i"></i>Fire Protection</li>
+                      <h6 id="Fire" style="display:none;"></h6 >
+
                     </ul>
-                  <li><i class="fa fa-plus" id="iconp" onclick="toggleDivp()"></i> Single Line Diagram</li>
-                  <li><i class="fa fa-plus" id="iconp" onclick="toggleDivp()"></i> Connectivity</li>
-                  <li><i class="fa fa-plus" id="iconp" onclick="toggleDivp()"></i> Rentis Management</li>
+
+                  <li onclick="toggleDiv('Single')"><i class="fa fa-plus" id="Single_i"></i> Single Line Diagram</li>
+                  <h6 id="Single" style="display:none;"></h6 >
+
+                  <li onclick="toggleDiv('Connectivity')"><i class="fa fa-plus" id="Connectivity_i"></i> Connectivity</li>
+                  <h6 id="Connectivity" style="display:none;"></h6 >
+
+                  <li onclick="toggleDiv('Rentis')"><i class="fa fa-plus" id="Rentis_i"></i> Rentis Management</li>
+                  <h6 id="Rentis" style="display:none;"></h6 >
                 
                 </ul>
                 <!-- <table class="table table-striped table-bordered table-condensed">

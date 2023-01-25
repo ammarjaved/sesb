@@ -210,9 +210,9 @@ style:myStyle,
       var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + feature.properties.NAME + "</td></tr>" + "<tr><th>Phone</th><td>" + feature.properties.TEL + "</td></tr>" + "<tr><th>Address</th><td>" + feature.properties.ADDRESS1 + "</td></tr>" + "<tr><th>Website</th><td><a class='url-break' href='" + feature.properties.URL + "' target='_blank'>" + feature.properties.URL + "</a></td></tr>" + "<table>";
       layer.on({
         click: function (e) {
-          $("#feature-title").html(feature.properties.NAME);
-          $("#feature-info").html(content);
-          $("#featureModal").modal("show");
+          // $("#feature-title").html(feature.properties.NAME);
+          // $("#feature-info").html(content);
+          // $("#featureModal").modal("show");
           highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
         }
       });
@@ -309,8 +309,12 @@ var pmu_ppu = L.geoJson(null, {
 
       layer.on({
         click: function (e) {
-          $("#pmu_ppu").html("<h4> <i class='fa fa-plus' id='iconp' onclick='toggleDivp()'></i> pmu_ppu details</h4><div id='pmu'>"+content+'</div>');
-          $("#pmu_ppu_con").html("<h4> <i class='fa fa-plus' id='icon' onclick='toggleDivc()'></i> Connectivity of pmu&ppu</h4><div id='con'>"+content2+"</div>");
+          let main = document.getElementById('sidebar-table');
+          if (main.style.display === "none") {
+            main.style.display="block";
+          }
+          // $("#pmu_ppu").html("<h4> <i class='fa fa-plus' id='iconp' onclick='toggleDivp()'></i> pmu_ppu details</h4><div id='pmu'>"+content+'</div>');
+          // $("#pmu_ppu_con").html("<h4> <i class='fa fa-plus' id='icon' onclick='toggleDivc()'></i> Connectivity of pmu&ppu</h4><div id='con'>"+content2+"</div>");
     //       var marker = new L.Marker([51.509, -0.08]);
     // marker.addTo(map);
     // marker.valueOf()._icon.style.Color = 'red';
@@ -627,56 +631,62 @@ if (!L.Browser.touch) {
   L.DomEvent.disableClickPropagation(container);
 }
 
-function toggleDivp(){
+
+var nest ="" ,nest_i="", ddiv="",ddiv_i="";
+
+function toggleDivp(id){
 
 
- var content = document.getElementById("pmu");
- var icon = document.getElementById("iconp");
- // consloe.log(content);
+ var content = document.getElementById(id);
+ var icon = document.getElementById(id+"_i");
+
   if (content.style.display === "none") {
+    if (nest !== "") {
+      nest.style.display = "none";
+      nest_i.classList.add('fa-plus');
+      nest_i.classList.remove('fa-minus');
+    }
       content.style.display = "block";
-       icon.classList.add('fa-plus');
-      icon.classList.remove('fa-minus');
-
-    } else {
-      content.style.display = "none";
-      icon.classList.remove('fa-plus');
+       icon.classList.remove('fa-plus');
       icon.classList.add('fa-minus');
-    }
-}
+      nest = content;
+      nest_i = icon;
 
-
-function toggleDiv(){
-alert("Sdfsdf");
-
- var content =document.getElementById("nested_substation") ;
- // var icon = document.getElementById("icon");
- // consloe.log(content);
-  if (content.style.display === "none") {
-      content.style.display = "block";
-      // icon.classList.add('fa-plus');
-      // icon.classList.remove('fa-minus');
     } else {
       content.style.display = "none";
-      // icon.classList.remove('fa-plus');
-      // icon.classList.add('fa-minus');
+      icon.classList.add('fa-plus');
+      icon.classList.remove('fa-minus');
+      nest = "";
     }
+
     
 }
 
 
+function toggleDiv(id){
 
-// var coll = document.getElementsByClassName("collapsible");
-// var i;
+ var content =document.getElementById(id) ;
+ var icon = document.getElementById(id+"_i");
 
-// for (i = 0; i < coll.length; i++) {
-//   coll[i].addEventListener("click", function() {
-//     this.classList.toggle("active");
-//     var content = this.nextElementSibling;
-//     if (content.style.display === "none") {
-//       content.style.display = "block";
-//     } else {
-//       content.style.display = "none";
-//     }
-//   });
-// }
+  if (content.style.display === "none") {
+if (ddiv !== "") {
+      ddiv.style.display = "none";
+      ddiv_i.classList.add('fa-plus');
+      ddiv_i.classList.remove('fa-minus');
+    }
+
+      content.style.display = "block";
+      icon.classList.remove('fa-plus');
+      icon.classList.add('fa-minus');
+      ddiv = content;
+      ddiv_i = icon;
+    } else {
+      content.style.display = "none";
+      icon.classList.remove('fa-minus');
+      icon.classList.add('fa-plus');
+      ddiv = "";
+  
+    }
+    
+}
+

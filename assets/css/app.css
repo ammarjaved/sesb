@@ -19,6 +19,10 @@ ul{
   padding: 0px;
 }
 
+.deactive{
+  display: none;
+}
+
 #nested_substation{
 padding: 15px;
 }
