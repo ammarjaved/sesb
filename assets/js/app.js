@@ -281,14 +281,7 @@ $.getJSON("data/poles.geojson", function (data) {
 var pmu_ppu = L.geoJson(null, {
   onEachFeature: function (feature, layer) {
     if (feature.properties) {
-      // var Icon = L.icon({
-      //   iconUrl: './images/mymarker.png',
-      //   iconSize: [18, 28], // size of the icon
-      //   style: style,
-      // });
-      // pmu_ppu.setIcon(Icon);
-
-      var content = 
+    var content =
       "<table class='table table-striped table-bordered table-condensed'>" +
       "<tbody >"+
       "<tr><th>Name</th><td>" + feature.properties.name + "</td></tr>" + "<tr><th>Type</th><td>" + feature.properties.type + "</td></tr>"  +
@@ -311,9 +304,6 @@ var pmu_ppu = L.geoJson(null, {
       "<tr><th>To</th><td> </td></tr>"+
       "</tbody>"+
        "<table>";
-
-             // "<p><a data-toggle='collapse' role='button' href='#collapseExample' aria-expanded='true' aria-controls='collapseExample'><i class='fa fa-plus' style='cursor: pointer;'></i></a></p>"+
-
       layer.on({
         click: function (e) {
           let main = document.getElementById('sidebar-table');
@@ -328,10 +318,7 @@ var pmu_ppu = L.geoJson(null, {
                   console.log(data.geojson);
                   var  tkk =  JSON.parse(data);
                   console.log(tkk[0].geojson);
-                   L.GeoJSON(tkk[0].geojson).addTo(map);
-  //                 theaters.addData(tkk[0].geojson);
-  // map.addLayer(theaterLayer);
-                   // L.geoJSON(JSON.parse(data) ).addTo(map);
+                   L.geoJson(JSON.parse(tkk[0].geojson)).addTo(map);
                 }});
 
 
@@ -349,12 +336,9 @@ var pmu_ppu = L.geoJson(null, {
 
 
 
-$.getJSON("data/pmu_ppu.geojson", function (data) {
+$.getJSON("Services/get_all_pmu.php", function (data) {
   console.log(data);
-  pmu_ppu.addData(data);
-
-  // L.layerGroup(data).addTo(map);s
-// layerr =  L.marker([data.features[0].geometry.coordinates[1],data.features[0].geometry.coordinates[0]]).addTo(map);
+  pmu_ppu.addData(JSON.parse(data[0].geojson));
 });
 
 
