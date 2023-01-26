@@ -281,6 +281,13 @@ $.getJSON("data/poles.geojson", function (data) {
 var pmu_ppu = L.geoJson(null, {
   onEachFeature: function (feature, layer) {
     if (feature.properties) {
+      // var Icon = L.icon({
+      //   iconUrl: './images/mymarker.png',
+      //   iconSize: [18, 28], // size of the icon
+      //   style: style,
+      // });
+      // pmu_ppu.setIcon(Icon);
+
       var content = 
       "<table class='table table-striped table-bordered table-condensed'>" +
       "<tbody >"+
@@ -313,23 +320,43 @@ var pmu_ppu = L.geoJson(null, {
           if (main.style.display === "none") {
             main.style.display="block";
           }
-          // $("#pmu_ppu").html("<h4> <i class='fa fa-plus' id='iconp' onclick='toggleDivp()'></i> pmu_ppu details</h4><div id='pmu'>"+content+'</div>');
-          // $("#pmu_ppu_con").html("<h4> <i class='fa fa-plus' id='icon' onclick='toggleDivc()'></i> Connectivity of pmu&ppu</h4><div id='con'>"+content2+"</div>");
-    //       var marker = new L.Marker([51.509, -0.08]);
-    // marker.addTo(map);
-    // marker.valueOf()._icon.style.Color = 'red';
-   //       $("#feature-title").html(feature.properties.name);
-     //     $("#feature-info").html(content);
-       //   $("#featureModal").modal("show");
+
+           $.ajax({
+                type: "GET",
+                url: `Services/getConnectedLayer.php`,
+                success: function(data) {
+                  console.log(data.geojson);
+                  var  tkk =  JSON.parse(data);
+                  console.log(tkk[0].geojson);
+                   L.GeoJSON(tkk[0].geojson).addTo(map);
+  //                 theaters.addData(tkk[0].geojson);
+  // map.addLayer(theaterLayer);
+                   // L.geoJSON(JSON.parse(data) ).addTo(map);
+                }});
+
+
+
+          $("#pmu").html(content);
+          $("#pmu_ppu_con").html(content2);
+ 
+
          highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
         }
       });
     }
   }
 });
+
+
+
 $.getJSON("data/pmu_ppu.geojson", function (data) {
+  console.log(data);
   pmu_ppu.addData(data);
+
+  // L.layerGroup(data).addTo(map);s
+// layerr =  L.marker([data.features[0].geometry.coordinates[1],data.features[0].geometry.coordinates[0]]).addTo(map);
 });
+
 
 map = L.map("map", {
   zoom: 7,
