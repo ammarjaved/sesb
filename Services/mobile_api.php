@@ -29,14 +29,14 @@ class MobileApi extends Connection
 				$res = pg_fetch_all($result);
 				$arr['data']= $res;
 			}else{
-				$arr['data']= "uploaded successfully";
+				$arr['message']= "uploaded successfully";
 			}
 			
 				
 		}catch(Exception $e){
 
 			$arr['status'] = "failed";
-			$arr['data']= "";
+			$arr['message']= $e->getMessage();
 		}
 
 		$this->closeConnection();
