@@ -14,20 +14,30 @@ class getConnectedLayer extends Connection
 	}
 
 	public function  loadData(){
-		$sql2="with foo as (select b.id ,b.geom from pmu as a , connectivity as b where st_intersects(a.geom,b.geom) and a.id =1)
-		SELECT json_build_object('type', 'FeatureCollection','crs',  json_build_object('type','name', 'properties', json_build_object('name', 'EPSG:4326'  )),'features', json_agg(json_build_object('type','Feature','id',id,'geometry',ST_AsGeoJSON(geom)::json,
-		        'properties', json_build_object(
-				'id', id
+
+		$id = $_REQUEST['id'];
+
+		$sql2="with foo as (select b.gid,b.name ,b.geom from pmu_sabah as a , sabah_transmission as b where st_intersects(a.geom,b.geom) and a.gid =$id)
+SELECT json_build_object('type', 'FeatureCollection','crs',  json_build_object('type','name', 'properties', json_build_object('name', 'EPSG:4326'  )),'features', json_agg(json_build_object('type','Feature','id',gid,'geometry',ST_AsGeoJSON(geom)::json,
+        'properties', json_build_object(
+		'gid', gid,
+		'name',name	
+
         )))) as geojson
-        FROM (select id,geom from foo
+        FROM (select gid,name,geom from foo
 			) as tbl1";
 
+			try{
 		$result = 	pg_query( $sql2);
 		$res = pg_fetch_all($result);
-
-		return  json_encode($res);
+	}catch(Exception $e){
+		$res = "failed";
+	}
 
 		$this->closeConnection();
+		return  json_encode($res);
+
+		
 	}
 
 	
