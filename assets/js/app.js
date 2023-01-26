@@ -285,15 +285,17 @@ var pmu_ppu = L.geoJson(null, {
     var content =
       "<table class='table table-striped table-bordered table-condensed'>" +
       "<tbody >"+
-      "<tr><th>Name</th><td>" + feature.properties.name + "</td></tr>" + "<tr><th>Type</th><td>" + feature.properties.type + "</td></tr>"  +
-      "<tr><th>Submission</th><td> "+feature.properties.submission+"</td></tr>"+
-      "<tr><th>Transformer</th><td> "+feature.properties.transformer+"</td></tr>"+
-      "<tr><th>Sub Grid</th><td> "+feature.properties.sub_grid+"</td></tr>"+
-      "<tr><th>CB</th><td> "+feature.properties.cb+"</td></tr>"+
-      "<tr><th>RMU</th><td> "+feature.properties.rmu+"</td></tr>"+
-      "<tr><th>NER</th><td> "+feature.properties.ner+"</td></tr>"+
-      "<tr><th>LVDB</th><td> "+feature.properties.lvdb+"</td></tr>"+
-      "<tr><th>FP</th><td> "+feature.properties.fp+"</td></tr>"+
+      "<tr><th>Id</th><td>" + feature.properties.gid + "</td></tr>"+
+      "<tr><th>Name</th><td>" + feature.properties.name + "</td></tr>"+
+      // "</tr>" + "<tr><th>Type</th><td>" + feature.properties.type + "</td></tr>"  +
+      // "<tr><th>Submission</th><td> "+feature.properties.submission+"</td></tr>"+
+      // "<tr><th>Transformer</th><td> "+feature.properties.transformer+"</td></tr>"+
+      // "<tr><th>Sub Grid</th><td> "+feature.properties.sub_grid+"</td></tr>"+
+      // "<tr><th>CB</th><td> "+feature.properties.cb+"</td></tr>"+
+      // "<tr><th>RMU</th><td> "+feature.properties.rmu+"</td></tr>"+
+      // "<tr><th>NER</th><td> "+feature.properties.ner+"</td></tr>"+
+      // "<tr><th>LVDB</th><td> "+feature.properties.lvdb+"</td></tr>"+
+      // "<tr><th>FP</th><td> "+feature.properties.fp+"</td></tr>"+
       "</tbody>"+
        "<table>";
 
@@ -328,7 +330,7 @@ if (pre_llayer) {
 
 
           $("#pmu").html(content);
-          $("#pmu_ppu_con").html(content2);
+          // $("#pmu_ppu_con").html(content2);
  
 
          highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
