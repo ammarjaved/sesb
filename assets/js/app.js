@@ -322,7 +322,10 @@ if (pre_llayer) {
                   console.log(data.geojson);
                   var  tkk =  JSON.parse(data);
                   console.log(tkk[0].geojson);
-                 pre_llayer=  L.geoJson(JSON.parse(tkk[0].geojson)).addTo(map);
+                  var style={
+                    color: "#00FFFF"
+                  }
+                 pre_llayer=  L.geoJson(JSON.parse(tkk[0].geojson),style).addTo(map);
                 }});
 
 
