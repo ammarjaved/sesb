@@ -274,8 +274,8 @@ var poles = L.geoJson(null, {
     }
   }
 });
-$.getJSON("data/poles.geojson", function (data) {
-  poles.addData(data);
+$.getJSON("Services/get_transmission_poles.php", function (data) {
+  poles.addData(JSON.parse(data[0].geojson));
 });
 
 var  pre_llayer;
@@ -343,7 +343,7 @@ if (pre_llayer) {
 
 
 $.getJSON("Services/get_all_pmu.php", function (data) {
-  console.log(data);
+  // console.log(data);
   pmu_ppu.addData(JSON.parse(data[0].geojson));
 });
 
