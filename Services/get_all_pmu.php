@@ -15,7 +15,14 @@ class getPMU extends Connection
 
 	public function getResult()
 	{
-		$query = "SELECT * FROM pmu";
+		$query = "SELECT json_build_object('type', 'FeatureCollection','crs',  json_build_object('type','name', 'properties', json_build_object('name', 'EPSG:4326'  )),'features', json_agg(json_build_object('type','Feature','id',id,'geometry',ST_AsGeoJSON(geom)::json,
+        'properties', json_build_object(
+  'gid', gid,
+        'id',id,
+        'name',name    
+        )))) as geojson
+        FROM (select * from pmu	) as tbl1; ";
+        
 		$result = pg_query($query);
 		$res = pg_fetch_all($result);
 

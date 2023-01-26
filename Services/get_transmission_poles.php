@@ -15,7 +15,14 @@ class getPoles extends Connection
 
 	public function getResult()
 	{
-		$query = "SELECT * FROM transmission_poles";
+		$query = "SELECT json_build_object('type', 'FeatureCollection','crs',  json_build_object('type','name', 'properties', json_build_object('name', 'EPSG:4326'  )),'features', json_agg(json_build_object('type','Feature','gid',gid,'geometry',ST_AsGeoJSON(geom)::json,
+        'properties', json_build_object(
+  'gid', gid,
+'tower_no',tower_no,
+			'name',name
+          
+        )))) as geojson
+        FROM (select * from transmission_poles	) as tbl1";
 		$result = pg_query($query);
 		$res = pg_fetch_all($result);
 
