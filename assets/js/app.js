@@ -278,7 +278,7 @@ $.getJSON("Services/get_transmission_poles.php", function (data) {
   poles.addData(JSON.parse(data[0].geojson));
 });
 
-var  pre_llayer;
+var  pre_llayer,cell1,cell2,row;
 var pmu_ppu = L.geoJson(null, {
   onEachFeature: function (feature, layer) {
     if (feature.properties) {
@@ -323,8 +323,26 @@ if (pre_llayer) {
                 success: function(data) {
                   console.log(data.geojson);
                   var  tkk =  JSON.parse(data);
-                  console.log(tkk[0].geojson);
-                 pre_llayer=  L.geoJson(JSON.parse(tkk[0].geojson)).addTo(map);
+                  // console.log(tkk[0].geojson);
+                  var tkk_j = JSON.parse(tkk[0].geojson)
+
+                 pre_llayer=  L.geoJson(tkk_j).addTo(map);
+
+console.log(tkk_j.features);
+var table = document.getElementById("Connectivity");
+$('#Connectivity').find('tr').remove().end();
+                 for (var i = 0; i < (tkk_j.features).length ; i++) {
+
+                   row = table.insertRow(0);
+
+
+ cell1 = row.insertCell(0);
+ 
+
+cell1.innerHTML = tkk_j.features[i].properties.name;
+
+
+                 }
                 }});
 
 
