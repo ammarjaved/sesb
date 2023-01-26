@@ -278,6 +278,7 @@ $.getJSON("data/poles.geojson", function (data) {
   poles.addData(data);
 });
 
+var  pre_llayer;
 var pmu_ppu = L.geoJson(null, {
   onEachFeature: function (feature, layer) {
     if (feature.properties) {
@@ -311,14 +312,17 @@ var pmu_ppu = L.geoJson(null, {
             main.style.display="block";
           }
 
+if (pre_llayer) {
+  map.removeLayer(pre_llayer);
+}
            $.ajax({
                 type: "GET",
-                url: `Services/getConnectedLayer.php`,
+                url: `Services/getConnectedLayer.php?id=${feature.properties.gid }`,
                 success: function(data) {
                   console.log(data.geojson);
                   var  tkk =  JSON.parse(data);
                   console.log(tkk[0].geojson);
-                   L.geoJson(JSON.parse(tkk[0].geojson)).addTo(map);
+                 pre_llayer=  L.geoJson(JSON.parse(tkk[0].geojson)).addTo(map);
                 }});
 
 
