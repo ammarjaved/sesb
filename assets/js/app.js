@@ -284,6 +284,17 @@ $.getJSON("Services/get_transmission_poles.php", function (data) {
 
 var  cell1,cell2,row;
 var pmu_ppu = L.geoJson(null, {
+  pointToLayer: function (feature, latlng) {
+    var LeafIcon = L.Icon.extend({
+      options: {
+        iconSize:     [19, 46]
+      }
+    });
+    var greenIcon = new LeafIcon({
+      iconUrl: 'http://localhost/sesb/data/pmu.png'
+    })
+    return L.marker(latlng, {icon: greenIcon});
+  },
   onEachFeature: function (feature, layer) {
     if (feature.properties) {
     var content =
@@ -360,6 +371,7 @@ var pmu_ppu = L.geoJson(null, {
 
 $.getJSON("Services/get_all_pmu.php", function (data) {
   // console.log(data);
+
   pmu_ppu.addData(JSON.parse(data[0].geojson));
 });
 
