@@ -709,11 +709,11 @@ function toggleDiv(id){
  var icon = document.getElementById(id+"_i");
 
   if (content.style.display === "none") {
-if (ddiv !== "") {
-      ddiv.style.display = "none";
-      ddiv_i.classList.add('fa-plus');
-      ddiv_i.classList.remove('fa-minus');
-    }
+// if (ddiv !== "") {
+//       ddiv.style.display = "none";
+//       ddiv_i.classList.add('fa-plus');
+//       ddiv_i.classList.remove('fa-minus');
+//     }
 
       content.style.display = "block";
       icon.classList.remove('fa-plus');
