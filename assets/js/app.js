@@ -291,7 +291,7 @@ var pmu_ppu = L.geoJson(null, {
       }
     });
     var greenIcon = new LeafIcon({
-      iconUrl: 'http://localhost/sesb/data/pmu.png'
+      iconUrl: 'http://121.121.232.54/sesb/assets/img/pmu.png'
     })
     return L.marker(latlng, {icon: greenIcon});
   },
