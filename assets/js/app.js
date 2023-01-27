@@ -343,10 +343,16 @@ var pmu_ppu = L.geoJson(null, {
 
                  // pre_llayer=  L.geoJson(tkk_j).addTo(map);
               var table = document.getElementById("Connectivity");
+
+              for (var i = 0; i < pre_llayer.length; i++) {
+                map.removeLayer(pre_llayer[i]);
+              }
+              pre_llayer =[];
               $('#Connectivity').find('tr').remove().end();
                  for (var i = 0; i < (tkk_j.features).length ; i++) {
                  
-                  $val = `<tr><td onclick="getLine('${tkk_j.features[i].properties.gid}')" style="cursor:pointer">${tkk_j.features[i].properties.name}</td></tr>`;;
+
+                  $val = `<tr><td id="line${tkk_j.features[i].properties.gid}" onclick="getLine('${tkk_j.features[i].properties.gid}')" style="cursor:pointer">${tkk_j.features[i].properties.name}</td></tr>`;;
                   // row = table.insertRow(0);
                   // cell1 = row.insertCell(0);
                   // cell1.innerHTML = tkk_j.features[i].properties.name;
@@ -740,11 +746,23 @@ function DownloadPDF() {
    window.location.href = 'assets/lorem-ipsum.pdf';
 }
 
-var pre_llayer;
+var pre_llayer =[];
+var pre_id = [];
 function getLine(id){
- if (pre_llayer) {
-            map.removeLayer(pre_llayer);
-          }
+ // if (pre_llayer) {
+ //            map.removeLayer(pre_llayer);
+ //          }
+
+       if(pre_id.includes(id))
+       {
+        map.removeLayer(pre_llayer);
+        $("#line"+id).removeClass('bg-ch');
+        for (var i = 0; i < pre_id.length; i++) {
+          if (pre_id === id) {}
+          pre_id.splice(i, 1)
+        }
+       }
+       else{
           $.ajax({
                 type: "GET",
                 url: `Services/get_line_ByID.php?id=${id}`,
@@ -754,7 +772,14 @@ function getLine(id){
                    var style={
                      color:"#00FFFF"
                    }
-                  pre_llayer=  L.geoJson(JSON.parse(parse_data[0].geojson),style).addTo(map);
+                  var pre_llaye=  L.geoJson(JSON.parse(parse_data[0].geojson),style).addTo(map);
+
+                  pre_llayer.push(pre_llaye);
+                  pre_id.push(id) 
+                  // alert(pre_id);
+                  $("#line"+id).addClass('bg-ch');
           }
+
 });
+        }
         }
