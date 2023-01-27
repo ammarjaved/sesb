@@ -203,6 +203,7 @@ var myStyle = { // Define your style object
 };
 /* Empty layer placeholder to add to layer control for listening when to add/remove theaters to markerClusters layer */
 var theaterLayer = L.geoJson(null);
+var pre_llayer;
 var theaters = L.geoJson(null, {
 style:myStyle,
   onEachFeature: function (feature, layer) {
@@ -210,18 +211,31 @@ style:myStyle,
       var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + feature.properties.NAME + "</td></tr>" + "<tr><th>Phone</th><td>" + feature.properties.TEL + "</td></tr>" + "<tr><th>Address</th><td>" + feature.properties.ADDRESS1 + "</td></tr>" + "<tr><th>Website</th><td><a class='url-break' href='" + feature.properties.URL + "' target='_blank'>" + feature.properties.URL + "</a></td></tr>" + "<table>";
       layer.on({
         click: function (e) {
+console.log(feature.properties);
+          if (pre_llayer) {
+            map.removeLayer(pre_llayer);
+          }
+          $.ajax({
+                type: "GET",
+                url: `Services/get_line_ByID.php?id=${feature.properties.gid}`,
+                success: function(data) {
+                  console.log(data);
+                   let  parse_data =  JSON.parse(data);
+                  pre_llayer=  L.geoJson(JSON.parse(parse_data[0].geojson)).addTo(map);
+          }
+        });
           // $("#feature-title").html(feature.properties.NAME);
           // $("#feature-info").html(content);
           // $("#featureModal").modal("show");
-          highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
+          // highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
         }
       });
 
     }
   }
 });
-$.getJSON("data/transmission_line.geojson", function (data) {
-  theaters.addData(data);
+$.getJSON("Services/transmission_line.php", function (data) {
+  theaters.addData(JSON.parse(data[0].geojson));
   map.addLayer(theaterLayer);
 });
 
@@ -278,7 +292,7 @@ $.getJSON("Services/get_transmission_poles.php", function (data) {
   poles.addData(JSON.parse(data[0].geojson));
 });
 
-var  pre_llayer,cell1,cell2,row;
+var  cell1,cell2,row;
 var pmu_ppu = L.geoJson(null, {
   onEachFeature: function (feature, layer) {
     if (feature.properties) {
@@ -314,9 +328,9 @@ var pmu_ppu = L.geoJson(null, {
             main.style.display="block";
           }
 
-if (pre_llayer) {
-  map.removeLayer(pre_llayer);
-}
+// if (pre_llayer) {
+//   map.removeLayer(pre_llayer);
+// }
            $.ajax({
                 type: "GET",
                 url: `Services/getConnectedLayer.php?id=${feature.properties.gid }`,
@@ -326,22 +340,13 @@ if (pre_llayer) {
                   // console.log(tkk[0].geojson);
                   var tkk_j = JSON.parse(tkk[0].geojson)
 
-                 pre_llayer=  L.geoJson(tkk_j).addTo(map);
-
-console.log(tkk_j.features);
-var table = document.getElementById("Connectivity");
-$('#Connectivity').find('tr').remove().end();
+                 // pre_llayer=  L.geoJson(tkk_j).addTo(map);
+              var table = document.getElementById("Connectivity");
+              $('#Connectivity').find('tr').remove().end();
                  for (var i = 0; i < (tkk_j.features).length ; i++) {
-
-                   row = table.insertRow(0);
-
-
- cell1 = row.insertCell(0);
- 
-
-cell1.innerHTML = tkk_j.features[i].properties.name;
-
-
+                  row = table.insertRow(0);
+                  cell1 = row.insertCell(0);
+                  cell1.innerHTML = tkk_j.features[i].properties.name;
                  }
                 }});
 
@@ -723,5 +728,10 @@ if (ddiv !== "") {
   
     }
     
+}
+
+
+function DownloadPDF() {
+   window.location.href = 'assets/lorem-ipsum.pdf';
 }
 
