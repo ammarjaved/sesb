@@ -739,7 +739,10 @@ function getLine(id){
                 success: function(data) {
                   // console.log(data);
                    let  parse_data =  JSON.parse(data);
-                  pre_llayer=  L.geoJson(JSON.parse(parse_data[0].geojson)).addTo(map);
+                   var style={
+                     color:"#00FFFF"
+                   }
+                  pre_llayer=  L.geoJson(JSON.parse(parse_data[0].geojson),style).addTo(map);
           }
 });
         }
