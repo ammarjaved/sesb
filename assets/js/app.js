@@ -344,10 +344,10 @@ var pmu_ppu = L.geoJson(null, {
                  // pre_llayer=  L.geoJson(tkk_j).addTo(map);
               var table = document.getElementById("Connectivity");
 
-              for (var i = 0; i < pre_llayer.length; i++) {
-                map.removeLayer(pre_llayer[i]);
-              }
-              pre_llayer =[];
+              // for (var i = 0; i < pre_llayer.length; i++) {
+              //   map.removeLayer(pre_llayer[i]);
+              // }
+              // pre_llayer =[];
               $('#Connectivity').find('tr').remove().end();
                  for (var i = 0; i < (tkk_j.features).length ; i++) {
                  
@@ -746,23 +746,25 @@ function DownloadPDF() {
    window.location.href = 'assets/lorem-ipsum.pdf';
 }
 
-var pre_llayer =[];
-var pre_id = [];
+// var pre_llayer =[];
+ var pre_id =null;
+var pre_llayer=false;
+var pre_llaye;
 function getLine(id){
  // if (pre_llayer) {
  //            map.removeLayer(pre_llayer);
  //          }
 
-       if(pre_id.includes(id))
-       {
-        map.removeLayer(pre_llayer);
-        $("#line"+id).removeClass('bg-ch');
-        for (var i = 0; i < pre_id.length; i++) {
-          if (pre_id === id) {}
-          pre_id.splice(i, 1)
-        }
-       }
-       else{
+       // if(pre_id.includes(id))
+       // {
+       //  map.removeLayer(pre_llayer);
+       //  $("#line"+id).removeClass('bg-ch');
+       //  for (var i = 0; i < pre_id.length; i++) {
+       //    if (pre_id === id) {}
+       //    pre_id.splice(i, 1)
+       //  }
+       // }
+       // else{
           $.ajax({
                 type: "GET",
                 url: `Services/get_line_ByID.php?id=${id}`,
@@ -772,14 +774,29 @@ function getLine(id){
                    var style={
                      color:"#00FFFF"
                    }
-                  var pre_llaye=  L.geoJson(JSON.parse(parse_data[0].geojson),style).addTo(map);
-
-                  pre_llayer.push(pre_llaye);
-                  pre_id.push(id) 
+                   if(pre_llayer==false) {
+                     pre_llaye = L.geoJson(JSON.parse(parse_data[0].geojson), style)
+                     map.addLayer(pre_llaye);
+                     $("#line" + id).addClass('bg-ch');
+                     pre_id = id;
+                     pre_llayer=true
+                   }else if(pre_llayer==true){
+                     map.removeLayer(pre_llaye);
+                     $("#line"+pre_id).removeClass('bg-ch');
+                     pre_llayer=false;
+                     if(id!=pre_id){
+                       pre_llaye= L.geoJson(JSON.parse(parse_data[0].geojson), style).addTo(map);
+                       $("#line" + id).addClass('bg-ch');
+                       pre_id = id;
+                       pre_llayer=true
+                     }
+                   }
+                 // pre_llayer[id]=pre_llaye;
+                 // pre_id.push(id)
                   // alert(pre_id);
-                  $("#line"+id).addClass('bg-ch');
+
           }
 
 });
-        }
+       // }
         }
