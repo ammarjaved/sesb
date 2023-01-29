@@ -800,3 +800,10 @@ function getLine(id){
 });
        // }
         }
+
+setTimeout(function(){
+  map.on('click', function(ev){
+    var latlng = map.mouseEventToLatLng(ev.originalEvent);
+    console.log(latlng.lat + ', ' + latlng.lng);
+  });
+},2000)
