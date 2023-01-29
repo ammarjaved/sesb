@@ -313,15 +313,6 @@ var pmu_ppu = L.geoJson(null, {
       // "<tr><th>FP</th><td> "+feature.properties.fp+"</td></tr>"+
       "</tbody>"+
        "<table>";
-
-       var content2 = 
-      "<table class='table table-striped table-bordered table-condensed'>" +
-      "<tbody >"+
-      "<tr><th>Id</th><td>"+ feature.properties.id + "</td></tr>" +
-      "<tr><th>From</th><td> </td></tr>"+
-      "<tr><th>To</th><td> </td></tr>"+
-      "</tbody>"+
-       "<table>";
       layer.on({
         click: function (e) {
           let main = document.getElementById('sidebar-table');
@@ -329,9 +320,6 @@ var pmu_ppu = L.geoJson(null, {
             main.style.display="block";
           }
 
-// if (pre_llayer) {
-//   map.removeLayer(pre_llayer);
-// }
            $.ajax({
                 type: "GET",
                 url: `Services/getConnectedLayer.php?id=${feature.properties.gid }`,
@@ -340,39 +328,43 @@ var pmu_ppu = L.geoJson(null, {
                   var  tkk =  JSON.parse(data);
                   // console.log(tkk[0].geojson);
                   var tkk_j = JSON.parse(tkk[0].geojson)
-
-                 // pre_llayer=  L.geoJson(tkk_j).addTo(map);
-              var table = document.getElementById("Connectivity");
-
-              // for (var i = 0; i < pre_llayer.length; i++) {
-              //   map.removeLayer(pre_llayer[i]);
-              // }
-              // pre_llayer =[];
-              $('#Connectivity').find('tr').remove().end();
-                 for (var i = 0; i < (tkk_j.features).length ; i++) {
-                 
-
-                  $val = `<tr><td id="line${tkk_j.features[i].properties.gid}" onclick="getLine('${tkk_j.features[i].properties.gid}')" style="cursor:pointer">${tkk_j.features[i].properties.name}</td></tr>`;;
-                  // row = table.insertRow(0);
-                  // cell1 = row.insertCell(0);
-                  // cell1.innerHTML = tkk_j.features[i].properties.name;
+                  var table = document.getElementById("Connectivity");
+                  $('#Connectivity').find('tr').remove().end();
+                  for (var i = 0; i < (tkk_j.features).length ; i++) {
+                  $val = `<tr><td id="line${tkk_j.features[i].properties.gid}" onclick="getLine('${tkk_j.features[i].properties.gid}')" style="cursor:pointer">${tkk_j.features[i].properties.name}</td></tr>`;
                   $("#Connectivity").append($val);
                  }
-                }});
+                }
+              });
+
+            $("#pmu").html(content);
+            $('#Rentis').html("");
+          highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
+         
 
 
-
-          $("#pmu").html(content);
-          // $("#pmu_ppu_con").html(content2);
- 
-
-         highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
         }
       });
     }
   }
 });
 
+
+// var rentis_l = L.geoJson(null, {
+  
+//   onEachFeature: function (feature, layer) {
+//     if (feature.properties) {
+//       layer.on({
+//         click: function (e) {
+         
+           
+
+
+//         }
+//       });
+//     }
+//   }
+// });
 
 
 $.getJSON("Services/get_all_pmu.php", function (data) {
@@ -497,7 +489,8 @@ var groupedOverlays = {
     "Transmission Line": theaterLayer,
     "transmission_20m_buffer": museumLayer,
     "Poles": poles,
-    "PMU&PPU":pmu_ppu
+    "PMU&PPU":pmu_ppu,
+    // "Rentis":rentis_l
   },
   "Reference": {
     "Sabah": boroughs
@@ -751,52 +744,107 @@ function DownloadPDF() {
 var pre_llayer=false;
 var pre_llaye;
 function getLine(id){
- // if (pre_llayer) {
- //            map.removeLayer(pre_llayer);
- //          }
+    $.ajax({
+      type: "GET",
+      url: `Services/get_line_ByID.php?id=${id}`,
+      success: function(data) {
+        // console.log(data);
+         let  parse_data =  JSON.parse(data);
+         let parse_p = JSON.parse(parse_data[0].geojson);
+         
+         var style={ color:"#00FFFF"}
+         if(pre_llayer==false) {
+           pre_llaye = L.geoJson(parse_p, style)
+           map.addLayer(pre_llaye);
+           $("#line" + id).addClass('bg-ch');
+           pre_id = id;
+           pre_llayer=true
+         }else if(pre_llayer==true){
+           map.removeLayer(pre_llaye);
+           $("#line"+pre_id).removeClass('bg-ch');
+           pre_llayer=false;
+           if(id!=pre_id){
+             pre_llaye= L.geoJson(JSON.parse(parse_data[0].geojson), style).addTo(map);
+             $("#line" + id).addClass('bg-ch');
+             pre_id = id;
+             pre_llayer=true
 
-       // if(pre_id.includes(id))
-       // {
-       //  map.removeLayer(pre_llayer);
-       //  $("#line"+id).removeClass('bg-ch');
-       //  for (var i = 0; i < pre_id.length; i++) {
-       //    if (pre_id === id) {}
-       //    pre_id.splice(i, 1)
-       //  }
-       // }
-       // else{
-          $.ajax({
-                type: "GET",
-                url: `Services/get_line_ByID.php?id=${id}`,
-                success: function(data) {
-                  // console.log(data);
-                   let  parse_data =  JSON.parse(data);
-                   var style={
-                     color:"#00FFFF"
-                   }
-                   if(pre_llayer==false) {
-                     pre_llaye = L.geoJson(JSON.parse(parse_data[0].geojson), style)
-                     map.addLayer(pre_llaye);
-                     $("#line" + id).addClass('bg-ch');
-                     pre_id = id;
-                     pre_llayer=true
-                   }else if(pre_llayer==true){
-                     map.removeLayer(pre_llaye);
-                     $("#line"+pre_id).removeClass('bg-ch');
-                     pre_llayer=false;
-                     if(id!=pre_id){
-                       pre_llaye= L.geoJson(JSON.parse(parse_data[0].geojson), style).addTo(map);
-                       $("#line" + id).addClass('bg-ch');
-                       pre_id = id;
-                       pre_llayer=true
-                     }
-                   }
-                 // pre_llayer[id]=pre_llaye;
-                 // pre_id.push(id)
-                  // alert(pre_id);
-
-          }
-
-});
-       // }
+            
+           }
+         }
+          getRentis(parse_p.features[0].properties.name);
         }
+      });
+}
+
+var rentis = '';
+var rentis_name = '';
+function getRentis(name) {
+  if (rentis_name === name) {
+    return false;
+  }
+  $.ajax({
+    type:'GET',
+    url:`Services/rentis.php?name=${name}`,
+    success:function(data){
+      // console.log(data);
+      rentis_name = name;
+            let rentis_pars =  JSON.parse(data);
+      let rentis = JSON.parse(rentis_pars[0].geojson);
+      if (rentis.features !== null) {
+
+      let prop = rentis.features[0].properties;
+      
+
+      var res_con = `<tr>
+                    <th>Segment</th>
+                    <td>${prop.segment}</td>
+                  </tr>
+                  <tr>
+                    <th>Cycle</th>
+                    <td>${prop.cycle}</td>
+                  </tr>
+                  <tr>
+                    <th>Vendor</th>
+                    <td>${prop.vendor}</td>
+                  </tr>
+                  <tr>
+                    <th>Alerdy Cleaned</th>
+                    <td>${prop.already_cleaned}</td>
+                  </tr>
+                  <tr>
+                    <th>After pic 1</th>
+                    <td><a class='example-image-link' href="${prop.after_pic1}" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic1}" height="50" width="50"></a></td>
+                  </tr>
+                  <tr>
+                    <th>After pic 2</th>
+                    <td><a class='example-image-link' href="${prop.after_pic2}" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic2}" height="50" width="50"></a></td>
+                  </tr>
+                  <tr>
+                    <th>After pic 3</th>
+                    <td><a class='example-image-link' href="${prop.after_pic3}" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic3}" height="50" width="50"></a></td>
+                  </tr>
+                  <tr>
+                    <th>Before pic 1</th>
+                    <td><a class='example-image-link' href="${prop.before_pic1}" data-lightbox='example-set' data-title='Pic'><img src="${prop.before_pic1}" height="50" width="50"></a></td>
+                  </tr>
+                  <tr>
+                    <th>Before pic 2</th>
+                    <td><a class='example-image-link' href="${prop.before_pic2}" data-lightbox='example-set' data-title='Pic'><img src="${prop.before_pic2}" height="50" width="50"></a></td>
+                  </tr>
+                  <tr>
+                    <th>Before pic 3</th>
+                    <td><a class='example-image-link' href="${prop.before_pic3}" data-lightbox='example-set' data-title='Pic'><img src="${prop.before_pic3}" height="50" width="50"></a></td>
+                  </tr>`;
+
+                  $('#Rentis').append(res_con);
+}else{
+  $('#Rentis').append("");
+}
+
+    }
+
+  })
+  
+}
+

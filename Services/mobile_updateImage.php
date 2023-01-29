@@ -54,8 +54,9 @@ class Rentis extends Connection
 		$vendor = $_REQUEST['vendor'];
 		$lat = $_REQUEST['lat'];
 		$lon = $_REQUEST['lon'];
+		$cleaned = $_REQUEST['already_cleaned'];
 
-		$query = "INSERT INTO rentis (before_pic1, before_pic2, before_pic3, after_pic1, after_pic2, after_pic3, segment, cycle, vendor,geom) VALUES('$web_des.$before_pic1', '$web_des.$before_pic2', '$web_des.$before_pic3','$web_des.$after_pic1','$web_des.$after_pic2','$web_des.$after_pic3','$segment', '$cycle','$vendor',st_geomfromtext('POINT('||$lon||' '||$lat||')',4326))";
+		$query = "INSERT INTO rentis (before_pic1, before_pic2, before_pic3, after_pic1, after_pic2, after_pic3, segment, cycle, vendor,already_cleaned,geom) VALUES('$web_des.$before_pic1', '$web_des.$before_pic2', '$web_des.$before_pic3','$web_des.$after_pic1','$web_des.$after_pic2','$web_des.$after_pic3','$segment', '$cycle','$vendor','$cleaned',st_geomfromtext('POINT('||$lon||' '||$lat||')',4326))";
 
 		try{
 		pg_query($query);
