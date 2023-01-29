@@ -349,22 +349,90 @@ var pmu_ppu = L.geoJson(null, {
   }
 });
 
+var rentisMarkerOptions = {
+  radius: 4,
+  fillColor: "blue",
+  color: "#000",
+  weight: 1,
+  opacity: 1,
+  fillOpacity: 0.8
+};
+var rentis_l = L.geoJson(null, {
+  pointToLayer: function (feature, latlng) {
+    return L.circleMarker(latlng, rentisMarkerOptions);
+  },
+  onEachFeature: function (feature, layer) {
+    if (feature.properties) {
+      layer.on({
+        click: function (e) {
+          var prop = feature.properties;
+          var content = `
+          <table class='table table-striped table-bordered table-condensed'>
+          <tbody>
+                    <tr>
+                    <th>Segment</th>
+                    <td>${prop.segment}</td>
+                  </tr>
+                  <tr>
+                    <th>Cycle</th>
+                    <td>${prop.cycle}</td>
+                  </tr>
+                  <tr>
+                    <th>Vendor</th>
+                    <td>${prop.vendor}</td>
+                  </tr>
+                  <tr>
+                    <th>Alerdy Cleaned</th>
+                    <td>${prop.already_cleaned}</td>
+                  </tr>
+                  <tr>
+                    <th>Length</th>
+                    <td>${prop.lenght}</td>
+                  </tr>
+                  <tr>
+                    <th>After pic 1</th>
+                    <td><a class='example-image-link' href="${prop.after_pic1}" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic1}" height="50" width="50"></a></td>
+                  </tr>
+                  <tr>
+                    <th>After pic 2</th>
+                    <td><a class='example-image-link' href="${prop.after_pic2}" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic2}" height="50" width="50"></a></td>
+                  </tr>
+                  <tr>
+                    <th>After pic 3</th>
+                    <td><a class='example-image-link' href="${prop.after_pic3}" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic3}" height="50" width="50"></a></td>
+                  </tr>
+                  <tr>
+                    <th>Before pic 1</th>
+                    <td><a class='example-image-link' href="${prop.before_pic1}" data-lightbox='example-set' data-title='Pic'><img src="${prop.before_pic1}" height="50" width="50"></a></td>
+                  </tr>
+                  <tr>
+                    <th>Before pic 2</th>
+                    <td><a class='example-image-link' href="${prop.before_pic2}" data-lightbox='example-set' data-title='Pic'><img src="${prop.before_pic2}" height="50" width="50"></a></td>
+                  </tr>
+                  <tr>
+                    <th>Before pic 3</th>
+                    <td><a class='example-image-link' href="${prop.before_pic3}" data-lightbox='example-set' data-title='Pic'><img src="${prop.before_pic3}" height="50" width="50"></a></td>
+                  </tr>
+                  </tbody></table>`;
 
-// var rentis_l = L.geoJson(null, {
-  
-//   onEachFeature: function (feature, layer) {
-//     if (feature.properties) {
-//       layer.on({
-//         click: function (e) {
-         
+        $("#feature-info").html(content);
+        $("#featureModal").modal("show");
            
+// highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
+         
 
+        }
+      });
+    }
+  }
+});
 
-//         }
-//       });
-//     }
-//   }
-// });
+$.getJSON("Services/rentis.php", function (data) {
+  console.log(data);
+
+  rentis_l.addData(JSON.parse(data[0].geojson));
+});
+
 
 
 $.getJSON("Services/get_all_pmu.php", function (data) {
@@ -490,7 +558,7 @@ var groupedOverlays = {
     "transmission_20m_buffer": museumLayer,
     "Poles": poles,
     "PMU&PPU":pmu_ppu,
-    // "Rentis":rentis_l
+    "Rentis":rentis_l
   },
   "Reference": {
     "Sabah": boroughs
@@ -782,21 +850,23 @@ var rentis_name = '';
 function getRentis(name) {
   if (rentis_name === name) {
     return false;
-  }
+  } 
+  console.log(name);
   $.ajax({
     type:'GET',
     url:`Services/rentis.php?name=${name}`,
     success:function(data){
-      // console.log(data);
+      
       rentis_name = name;
-            let rentis_pars =  JSON.parse(data);
-      let rentis = JSON.parse(rentis_pars[0].geojson);
+      var rentis_pars =  JSON.parse(data);
+      var rentis = JSON.parse(rentis_pars[0].geojson);
       if (rentis.features !== null) {
 
-      let prop = rentis.features[0].properties;
+      let prop = rentis.features[0].properties; 
       
 
-      var res_con = `<tr>
+      var res_con = `
+      <tbody><tr>
                     <th>Segment</th>
                     <td>${prop.segment}</td>
                   </tr>
@@ -813,33 +883,38 @@ function getRentis(name) {
                     <td>${prop.already_cleaned}</td>
                   </tr>
                   <tr>
+                    <th>Length</th>
+                    <td>${prop.lenght}</td>
+                  </tr>
+                  <tr>
                     <th>After pic 1</th>
-                    <td><a class='example-image-link' href="${prop.after_pic1}" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic1}" height="50" width="50"></a></td>
+                    <td class="text-center"><a class='example-image-link' href="${prop.after_pic1}" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic1}" height="50" width="50"></a></td>
                   </tr>
                   <tr>
                     <th>After pic 2</th>
-                    <td><a class='example-image-link' href="${prop.after_pic2}" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic2}" height="50" width="50"></a></td>
+                    <td class="text-center"><a class='example-image-link' href="${prop.after_pic2}" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic2}" height="50" width="50"></a></td>
                   </tr>
                   <tr>
                     <th>After pic 3</th>
-                    <td><a class='example-image-link' href="${prop.after_pic3}" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic3}" height="50" width="50"></a></td>
+                    <td class="text-center"><a class='example-image-link' href="${prop.after_pic3}" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic3}" height="50" width="50"></a></td>
                   </tr>
                   <tr>
                     <th>Before pic 1</th>
-                    <td><a class='example-image-link' href="${prop.before_pic1}" data-lightbox='example-set' data-title='Pic'><img src="${prop.before_pic1}" height="50" width="50"></a></td>
+                    <td class="text-center"><a class='example-image-link' href="${prop.before_pic1}" data-lightbox='example-set' data-title='Pic'><img src="${prop.before_pic1}" height="50" width="50"></a></td>
                   </tr>
                   <tr>
                     <th>Before pic 2</th>
-                    <td><a class='example-image-link' href="${prop.before_pic2}" data-lightbox='example-set' data-title='Pic'><img src="${prop.before_pic2}" height="50" width="50"></a></td>
+                    <td class="text-center"><a class='example-image-link' href="${prop.before_pic2}" data-lightbox='example-set' data-title='Pic'><img src="${prop.before_pic2}" height="50" width="50"></a></td>
                   </tr>
                   <tr>
                     <th>Before pic 3</th>
-                    <td><a class='example-image-link' href="${prop.before_pic3}" data-lightbox='example-set' data-title='Pic'><img src="${prop.before_pic3}" height="50" width="50"></a></td>
-                  </tr>`;
+                    <td class="text-center"><a class='example-image-link' href="${prop.before_pic3}" data-lightbox='example-set' data-title='Pic'><img src="${prop.before_pic3}" height="50" width="50"></a></td>
+                  </tr>
+                  </tbod>`;
 
-                  $('#Rentis').append(res_con);
+                  $('#Rentis').html(res_con);
 }else{
-  $('#Rentis').append("");
+  $('#Rentis').html("<tr><td>No Record Found</td></tr>");
 }
 
     }

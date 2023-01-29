@@ -118,9 +118,12 @@ class Rentis extends Connection
 		$lat 	 =	(isset($_REQUEST['lat'])) ? $_REQUEST['lat'] : '' ;
 		$lon 	 = 	(isset($_REQUEST['lon'])) ? $_REQUEST['lon'] : '' ;
 		$cleaned = 	(isset($_REQUEST['already_cleaned'])) ? $_REQUEST['already_cleaned'] : '' ;
+		$status  =  (isset($_REQUEST['status'])) ? $_REQUEST['status'] : '' ;
 
 
-		$query = "INSERT INTO rentis (before_pic1, before_pic2, before_pic3, after_pic1, after_pic2, after_pic3, segment, cycle, vendor,already_cleaned,geom) VALUES('$b_1', '$b_2', '$b_3','$a_1','$a_2','$a_3','$segment', '$cycle','$vendor','$cleaned',st_geomfromtext('POINT('||$lon||' '||$lat||')',4326))";
+		$query = "INSERT INTO rentis (
+							before_pic1, before_pic2, before_pic3, after_pic1, after_pic2, after_pic3, segment, cycle, vendor,already_cleaned,status , geom)
+							 VALUES('$b_1', '$b_2', '$b_3','$a_1','$a_2','$a_3','$segment', '$cycle','$vendor','$cleaned','$status',st_geomfromtext('POINT('||$lon||' '||$lat||')',4326))";
 
 		try{
 
