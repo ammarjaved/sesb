@@ -13,7 +13,9 @@ input[type="radio"], input[type="checkbox"] {
 .mt-4{
 margin-top:10px;
 }
-
+.text-center{
+  text-align: center!important;
+}
 .custom-table-css{
   border: 0px;
 }
