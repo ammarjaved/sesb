@@ -36,7 +36,7 @@ class getRentis extends Connection
 	        			 	 	'lenght',lenght
 			))))
 			 as geojson FROM (
-			 	select id, segment, vendor, geom, (select st_length(st_transform(geom,32650))/1000 from sabah_transmission where name = rentis.segment) as lenght,(SELECT distinct max(cycle::integer) from rentis where segment = 'PMU Kudat - PMU Menggaris') as cycle  from rentis where segment = '$name') as tbl1 limit 1";
+			 	select id, segment, vendor, geom, (select st_length(st_transform(geom,32650))/1000 from sabah_transmission where name = rentis.segment) as lenght,(SELECT distinct max(cycle::integer) from rentis where segment = '$name') as cycle  from rentis where segment = '$name') as tbl1 limit 1";
 
 			try{
 				$result = 	pg_query( $sql2);
