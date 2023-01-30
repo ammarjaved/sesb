@@ -16,6 +16,9 @@ margin-top:10px;
 .text-center{
   text-align: center!important;
 }
+.card{
+  text-align: center;
+}
 .custom-table-css{
   border: 0px;
 }

@@ -19,6 +19,7 @@ class getRentis extends Connection
 		// $name = $_GET['name'];
 		// return $name;
 
+		$res =[];
 		$sql2="SELECT 
 			json_build_object('type', 'FeatureCollection','crs',  
 				json_build_object('type','name', 'properties', 
@@ -37,13 +38,26 @@ class getRentis extends Connection
 			))))
 			 as geojson FROM (
 			 	select id, segment, vendor, geom, (select st_length(st_transform(geom,32650))/1000 from sabah_transmission where name = rentis.segment) as lenght,(SELECT distinct max(cycle::integer) from rentis where segment = '$name') as cycle  from rentis where segment = '$name') as tbl1 limit 1";
+			$fname = explode(" -",$name);
+	 		
+				$sql1 = "with foo as (select max(cycle::integer) as cl,max(id) as id from rentis where segment ='$name')
+							select st_length(st_transform(st_makeline(a.geom,b.geom),32650))/1000 covered_distance  from pmu_sabah a,
+							(select g.* from rentis g,foo where segment ='$name' and cycle::integer=foo.cl and g.id=foo.id) b	where a.name ilike '%$fname[0]%'";
 
-			try{
-				$result = 	pg_query( $sql2);
-				$res = pg_fetch_all($result);
+				try{
+				$result = 	pg_query( $sql1);
+				$res2    =  pg_fetch_all($result);
+				$res['complete'] = $res2[0]['covered_distance'];
+
+
+				$result2 = pg_query($sql2);
+				$res['data'] = pg_fetch_all($result2);
+				
 				}catch(Exception $e){
 					$res = "failed";
 				}
+
+
 
 		$this->closeConnection();
 		return  json_encode($res);
@@ -80,6 +94,10 @@ class getRentis extends Connection
 					$res = "failed";
 				}
 
+
+
+
+
 		$this->closeConnection();
 		return  json_encode($res);
 
@@ -95,6 +113,7 @@ class getRentis extends Connection
 $json = new getRentis();
 if (isset($_GET['name'])) {
 	 $name = $_GET['name'];
+	 // 
 	echo $json->loadData($name);
 }else{
 	echo $json->getAllRentis();

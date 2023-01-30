@@ -398,27 +398,27 @@ var rentis_l = L.geoJson(null, {
                   </tr>
                   <tr>
                     <th>Before pic 1</th>
-                    <td><a class='example-image-link' href="${prop.before_pic1}" data-lightbox='example-set' data-title='Pic'><img src="${prop.before_pic1}" height="50" width="50"></a></td>
+                    <td><a class='example-image-link text-center' href="${prop.before_pic1}" data-lightbox='example-set' data-title='Pic'><img src="${prop.before_pic1}" height="50" width="50"></a></td>
                   </tr>
                   <tr>
                     <th>Before pic 2</th>
-                    <td><a class='example-image-link' href="${prop.before_pic2}" data-lightbox='example-set' data-title='Pic'><img src="${prop.before_pic2}" height="50" width="50"></a></td>
+                    <td><a class='example-image-link text-center' href="${prop.before_pic2}" data-lightbox='example-set' data-title='Pic'><img src="${prop.before_pic2}" height="50" width="50"></a></td>
                   </tr>
                   <tr>
                     <th>Before pic 3</th>
-                    <td><a class='example-image-link' href="${prop.before_pic3}" data-lightbox='example-set' data-title='Pic'><img src="${prop.before_pic3}" height="50" width="50"></a></td>
+                    <td><a class='example-image-link text-center' href="${prop.before_pic3}" data-lightbox='example-set' data-title='Pic'><img src="${prop.before_pic3}" height="50" width="50"></a></td>
                   </tr>
                   <tr>
                     <th>After pic 1</th>
-                    <td><a class='example-image-link' href="${prop.after_pic1}" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic1}" height="50" width="50"></a></td>
+                    <td><a class='example-image-link text-center' href="${prop.after_pic1}" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic1}" height="50" width="50"></a></td>
                   </tr>
                   <tr>
                     <th>After pic 2</th>
-                    <td><a class='example-image-link' href="${prop.after_pic2}" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic2}" height="50" width="50"></a></td>
+                    <td><a class='example-image-link text-center' href="${prop.after_pic2}" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic2}" height="50" width="50"></a></td>
                   </tr>
                   <tr>
                     <th>After pic 3</th>
-                    <td><a class='example-image-link' href="${prop.after_pic3}" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic3}" height="50" width="50"></a></td>
+                    <td><a class='example-image-link text-center' href="${prop.after_pic3}" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic3}" height="50" width="50"></a></td>
                   </tr>
                   </tbody></table>`;
 
@@ -866,9 +866,9 @@ function getRentis(name) {
     type:'GET',
     url:`Services/rentis.php?name=${name}`,
     success:function(data){
-      
+      // console.log(JSON.parse(data).data);
       rentis_name = name;
-      var rentis_pars =  JSON.parse(data);
+      var rentis_pars =  JSON.parse(data).data;
       var rentis = JSON.parse(rentis_pars[0].geojson);
       if (rentis.features !== null) {
 
@@ -889,8 +889,16 @@ function getRentis(name) {
                         <td>${prop.vendor}</td>
                       </tr>
                       <tr>
-                        <th>Length</th>
+                        <th>Total distance</th>
                         <td> ${parseInt(prop.lenght)} KM</td>
+                      </tr>
+                      <tr>
+                        <th>Distance covered</th>
+                        <td> ${parseInt(JSON.parse(data).complete)} KM</td>
+                      </tr>
+                      <tr>
+                      <th>Detail</th>
+                      <td><button type="button" class="btn btn-sm btn-primary" onclick="detail(${parseInt(prop.lenght)},${parseInt(JSON.parse(data).complete)})">Detail</button></td>
                       </tr>
                     </tbod>`;
 
@@ -903,5 +911,89 @@ function getRentis(name) {
 
   })
   
+}
+
+
+
+function detail(lenght ,comp){
+var remain = (100*comp)/lenght;
+console.log(remain);
+   $("#feature-info").html(`
+      <div class="row">
+        <div class='col-md-4'>
+          <div class="card">
+          <div class="card-title"><h4>Total Area</h4></div>
+            <h6>${lenght} KM</h6>
+          </div>
+        </div>
+        <div class='col-md-4'>
+          <div class="card">
+          <div class="card-title"><h4>Total Remaining</h4></div>
+            <h6>${parseInt(remain)} KM</h6>
+          </div>
+        </div>
+        <div class='col-md-4'>
+          <div class="card">
+          <div class="card-title"><h4>Total Covered</h4></div>
+            <h6>${comp} KM</h6>
+          </div>
+        </div>
+      </div>
+      <div class="mt-4">
+    <div id="container4"></div>
+    </div>`);
+   pieChart(100-remain,remain);
+ $("#feature-title").html("Rentis Detail");
+        $("#featureModal").modal("show");
+
+}
+
+function pieChart(a,b){
+    Highcharts.chart('container4', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+
+        credits:false,
+        title: {
+            text: 'Total covered / uncovered'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                }
+            }
+        },
+        series: [{
+            name: 'Brands',
+            colorByPoint: true,
+            data: [{
+                name: 'Total Remaining',
+                y: a,
+                sliced: true,
+                selected: true,
+                color:'orange'
+            }, {
+                name: 'Total Covered ',
+                y: b,
+                color:'green'
+            }]
+        }]
+    });
 }
 
