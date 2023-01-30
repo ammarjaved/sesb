@@ -33,18 +33,11 @@ class getRentis extends Connection
 	        			 	'cycle',cycle,
 	        			 	'vendor',vendor,
 	        			 	 'geom',geom, 
-	        			 	 'before_pic1',before_pic1,
-	        			 	 	'before_pic2',before_pic2,
-	        			 	 	'before_pic3',before_pic3,
-	        			 	 	'after_pic1',after_pic1,
-	        			 	 	'after_pic2',after_pic2,
-	        			 	 	'after_pic3',after_pic3,
-	        			 	 	'already_cleaned',already_cleaned,
 	        			 	 	'lenght',lenght
 			))))
 			 as geojson FROM (
-			 	select id, segment, cycle, vendor, geom, before_pic1, before_pic2, before_pic3, after_pic1,after_pic2, after_pic3, already_cleaned, (select st_length(st_transform(geom,32650))/1000 from sabah_transmission where name = rentis.segment) as lenght  from rentis where segment = '$name') as tbl1 limit 1";
-			 
+			 	select id, segment, vendor, geom, (select st_length(st_transform(geom,32650))/1000 from sabah_transmission where name = rentis.segment) as lenght,(SELECT distinct max(cycle::integer) from rentis where segment = 'PMU Kudat - PMU Menggaris') as cycle  from rentis where segment = '$name') as tbl1 limit 1";
+
 			try{
 				$result = 	pg_query( $sql2);
 				$res = pg_fetch_all($result);
