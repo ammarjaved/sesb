@@ -339,10 +339,14 @@ var pmu_ppu = L.geoJson(null, {
 
             $("#pmu").html(content);
             $('#Rentis').html("");
+          highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
+
             rentis_name = '' ;
             pre_llayer=false;
-            map.removeLayer(pre_llaye);
-          highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
+            if (pre_llaye) {
+              map.removeLayer(pre_llaye);
+            }
+        
          
 
 
