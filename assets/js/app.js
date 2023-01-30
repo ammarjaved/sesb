@@ -410,15 +410,15 @@ var rentis_l = L.geoJson(null, {
                   </tr>
                   <tr>
                     <th>After pic 1</th>
-                    <td><a class='example-image-link text-center' href="${prop.after_pic1}" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic1}" height="50" width="50"></a></td>
+                    <td><a class='example-image-link text-center' href="${prop.after_pic1}" alt="no image" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic1}" height="50" width="50"></a></td>
                   </tr>
                   <tr>
                     <th>After pic 2</th>
-                    <td><a class='example-image-link text-center' href="${prop.after_pic2}" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic2}" height="50" width="50"></a></td>
+                    <td><a class='example-image-link text-center' href="${prop.after_pic2}" alt="no image" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic2}" height="50" width="50"></a></td>
                   </tr>
                   <tr>
                     <th>After pic 3</th>
-                    <td><a class='example-image-link text-center' href="${prop.after_pic3}" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic3}" height="50" width="50"></a></td>
+                    <td><a class='example-image-link text-center' href="${prop.after_pic3}" alt="no image" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic3}" height="50" width="50"></a></td>
                   </tr>
                   </tbody></table>`;
 
@@ -929,7 +929,7 @@ console.log(remain);
         <div class='col-md-4'>
           <div class="card">
           <div class="card-title"><h4>Total Remaining</h4></div>
-            <h6>${parseInt(remain)} KM</h6>
+            <h6>${parseInt(lenght-comp)} KM</h6>
           </div>
         </div>
         <div class='col-md-4'>
