@@ -194,7 +194,7 @@ class Rentis extends Connection
 		}
 
 
-		if (isset($_REQUEST['after_pic3'])) {
+		if (isset($_FILES['after_pic3'])) {
 
 			$after_pic3 = 	rand().$_FILES["after_pic3"]["name"];
 		    $after3 	= 	$_FILES["after_pic3"]["tmp_name"];

@@ -339,6 +339,9 @@ var pmu_ppu = L.geoJson(null, {
 
             $("#pmu").html(content);
             $('#Rentis').html("");
+            rentis_name = '' ;
+            pre_llayer=false;
+            map.removeLayer(pre_llaye);
           highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
          
 
@@ -390,18 +393,6 @@ var rentis_l = L.geoJson(null, {
                     <td>${prop.lenght}</td>
                   </tr>
                   <tr>
-                    <th>After pic 1</th>
-                    <td><a class='example-image-link' href="${prop.after_pic1}" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic1}" height="50" width="50"></a></td>
-                  </tr>
-                  <tr>
-                    <th>After pic 2</th>
-                    <td><a class='example-image-link' href="${prop.after_pic2}" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic2}" height="50" width="50"></a></td>
-                  </tr>
-                  <tr>
-                    <th>After pic 3</th>
-                    <td><a class='example-image-link' href="${prop.after_pic3}" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic3}" height="50" width="50"></a></td>
-                  </tr>
-                  <tr>
                     <th>Before pic 1</th>
                     <td><a class='example-image-link' href="${prop.before_pic1}" data-lightbox='example-set' data-title='Pic'><img src="${prop.before_pic1}" height="50" width="50"></a></td>
                   </tr>
@@ -412,6 +403,18 @@ var rentis_l = L.geoJson(null, {
                   <tr>
                     <th>Before pic 3</th>
                     <td><a class='example-image-link' href="${prop.before_pic3}" data-lightbox='example-set' data-title='Pic'><img src="${prop.before_pic3}" height="50" width="50"></a></td>
+                  </tr>
+                  <tr>
+                    <th>After pic 1</th>
+                    <td><a class='example-image-link' href="${prop.after_pic1}" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic1}" height="50" width="50"></a></td>
+                  </tr>
+                  <tr>
+                    <th>After pic 2</th>
+                    <td><a class='example-image-link' href="${prop.after_pic2}" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic2}" height="50" width="50"></a></td>
+                  </tr>
+                  <tr>
+                    <th>After pic 3</th>
+                    <td><a class='example-image-link' href="${prop.after_pic3}" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic3}" height="50" width="50"></a></td>
                   </tr>
                   </tbody></table>`;
 
@@ -830,6 +833,8 @@ function getLine(id){
          }else if(pre_llayer==true){
            map.removeLayer(pre_llaye);
            $("#line"+pre_id).removeClass('bg-ch');
+           $("#Rentis").html("");
+           
            pre_llayer=false;
            if(id!=pre_id){
              pre_llaye= L.geoJson(JSON.parse(parse_data[0].geojson), style).addTo(map);
@@ -841,6 +846,7 @@ function getLine(id){
            }
          }
           getRentis(parse_p.features[0].properties.name);
+          rentis_name = '' ;
         }
       });
 }
@@ -851,7 +857,7 @@ function getRentis(name) {
   if (rentis_name === name) {
     return false;
   } 
-  console.log(name);
+  // console.log(name);
   $.ajax({
     type:'GET',
     url:`Services/rentis.php?name=${name}`,
@@ -865,57 +871,29 @@ function getRentis(name) {
       let prop = rentis.features[0].properties; 
       
 
-      var res_con = `
-      <tbody><tr>
-                    <th>Segment</th>
-                    <td>${prop.segment}</td>
-                  </tr>
-                  <tr>
-                    <th>Cycle</th>
-                    <td>${prop.cycle}</td>
-                  </tr>
-                  <tr>
-                    <th>Vendor</th>
-                    <td>${prop.vendor}</td>
-                  </tr>
-                  <tr>
-                    <th>Alerdy Cleaned</th>
-                    <td>${prop.already_cleaned}</td>
-                  </tr>
-                  <tr>
-                    <th>Length</th>
-                    <td>${prop.lenght}</td>
-                  </tr>
-                  <tr>
-                    <th>After pic 1</th>
-                    <td class="text-center"><a class='example-image-link' href="${prop.after_pic1}" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic1}" height="50" width="50"></a></td>
-                  </tr>
-                  <tr>
-                    <th>After pic 2</th>
-                    <td class="text-center"><a class='example-image-link' href="${prop.after_pic2}" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic2}" height="50" width="50"></a></td>
-                  </tr>
-                  <tr>
-                    <th>After pic 3</th>
-                    <td class="text-center"><a class='example-image-link' href="${prop.after_pic3}" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic3}" height="50" width="50"></a></td>
-                  </tr>
-                  <tr>
-                    <th>Before pic 1</th>
-                    <td class="text-center"><a class='example-image-link' href="${prop.before_pic1}" data-lightbox='example-set' data-title='Pic'><img src="${prop.before_pic1}" height="50" width="50"></a></td>
-                  </tr>
-                  <tr>
-                    <th>Before pic 2</th>
-                    <td class="text-center"><a class='example-image-link' href="${prop.before_pic2}" data-lightbox='example-set' data-title='Pic'><img src="${prop.before_pic2}" height="50" width="50"></a></td>
-                  </tr>
-                  <tr>
-                    <th>Before pic 3</th>
-                    <td class="text-center"><a class='example-image-link' href="${prop.before_pic3}" data-lightbox='example-set' data-title='Pic'><img src="${prop.before_pic3}" height="50" width="50"></a></td>
-                  </tr>
-                  </tbod>`;
+      var res_con = `<tbody>
+                      <tr>
+                        <th>Segment</th>
+                        <td>${prop.segment}</td>
+                      </tr>
+                      <tr>
+                        <th>No of Cycle</th>
+                        <td>${prop.cycle}</td>
+                      </tr>
+                      <tr>
+                        <th>Vendor</th>
+                        <td>${prop.vendor}</td>
+                      </tr>
+                      <tr>
+                        <th>Length</th>
+                        <td> ${parseInt(prop.lenght)} KM</td>
+                      </tr>
+                    </tbod>`;
 
                   $('#Rentis').html(res_con);
-}else{
-  $('#Rentis').html("<tr><td>No Record Found</td></tr>");
-}
+      }else{
+        $('#Rentis').html("<tr><td>No Record Found</td></tr>");
+      }
 
     }
 
