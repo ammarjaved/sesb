@@ -821,7 +821,7 @@ function toggleDiv(id){
 
 
 function DownloadPDF() {
-   window.location.href = 'assets/lorem-ipsum.pdf';
+   window.location.href = 'assets/PMU BUKIT RAMBAI-Model.pdf';
 }
 
 // var pre_llayer =[];
@@ -908,7 +908,10 @@ function getRentis(name) {
   // } 
 
   cycle = $('#select_cycle').val();
-
+  // console.log(cycle);
+  // console.log(cycle);
+  // alert(cycle);
+  $.ajax({
     type:'GET',
     url:`Services/rentis.php?name=${name}&cycle=${cycle}`,
     success:function(data){
