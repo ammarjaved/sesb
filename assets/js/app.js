@@ -265,10 +265,12 @@ var poles = L.geoJson(null, {
     return L.circleMarker(latlng, geojsonMarkerOptions);
   },
   onEachFeature: function (feature, layer) {
+
     if (feature.properties) {
-      var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + feature.properties.NAME + "</td></tr>" + "<tr><th>Phone</th><td>" + feature.properties.TEL + "</td></tr>" + "<tr><th>Address</th><td>" + feature.properties.ADRESS1 + "</td></tr>" + "<tr><th>Website</th><td><a class='url-break' href='" + feature.properties.URL + "' target='_blank'>" + feature.properties.URL + "</a></td></tr>" + "<table>";
+      var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>gid</th><td>" + feature.properties.gid+ "</td></tr>"+"<tr><th>Name</th><td>" + feature.properties.name+ "</td></tr>" + "<tr><th>Tower no</th><td>" + feature.properties.tower_no + "</td></tr>" + "<tr><th>Type</th><td>" + feature.properties.type + "</td></tr>" + "<table>";
       layer.on({
         click: function (e) {
+           console.log(feature);
           $("#feature-title").html(feature.properties.NAME);
           $("#feature-info").html(content);
           $("#featureModal").modal("show");
@@ -397,29 +399,27 @@ var rentis_l = L.geoJson(null, {
                     <td>${prop.lenght}</td>
                   </tr>
                   <tr>
-                    <th>Before pic 1</th>
-                    <td><a class='example-image-link text-center' href="${prop.before_pic1}" data-lightbox='example-set' data-title='Pic'><img src="${prop.before_pic1}" height="50" width="50"></a></td>
+                    <th class="text-center">Before pic </th>
+                    <th class="text-center" >After pic</th>
                   </tr>
                   <tr>
-                    <th>Before pic 2</th>
-                    <td><a class='example-image-link text-center' href="${prop.before_pic2}" data-lightbox='example-set' data-title='Pic'><img src="${prop.before_pic2}" height="50" width="50"></a></td>
+                    <td class="text-center"><a class='example-image-link text-center' href="${prop.before_pic1}" data-lightbox='example-set' data-title='Pic'><img src="${prop.before_pic1}" height="50" alt="no image uploaded" width="50"></a></td>
+                    <td class="text-center"><a class='example-image-link text-center' href="${prop.after_pic1}"  data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic1}" alt="no image uploaded" height="50" width="50"></a></td>
                   </tr>
+
                   <tr>
-                    <th>Before pic 3</th>
-                    <td><a class='example-image-link text-center' href="${prop.before_pic3}" data-lightbox='example-set' data-title='Pic'><img src="${prop.before_pic3}" height="50" width="50"></a></td>
+                    <td class="text-center"><a class='example-image-link text-center' href="${prop.before_pic2}" data-lightbox='example-set' data-title='Pic'><img src="${prop.before_pic2}" height="50" alt="no image uploaded" width="50"></a></td>
+                    <td class="text-center"><a class='example-image-link text-center' href="${prop.after_pic2}"  data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic2}" alt="no image uploaded" height="50" width="50"></a></td>
                   </tr>
+
+
                   <tr>
-                    <th>After pic 1</th>
-                    <td><a class='example-image-link text-center' href="${prop.after_pic1}" alt="no image" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic1}" height="50" width="50"></a></td>
+                    
+                    // <td class="text-center col-md-6"><a class='example-image-link text-center' href="${prop.before_pic3}" data-lightbox='example-set' data-title='Pic'><img src="${prop.before_pic3}" height="50" alt="no image uploaded" width="50"></a></td>
+                    <td class="text-center col-md-6"><a class='example-image-link text-center' href="${prop.after_pic3}"  data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic3}" height="50" alt="no image uploaded" width="50"></a></td>
+
                   </tr>
-                  <tr>
-                    <th>After pic 2</th>
-                    <td><a class='example-image-link text-center' href="${prop.after_pic2}" alt="no image" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic2}" height="50" width="50"></a></td>
-                  </tr>
-                  <tr>
-                    <th>After pic 3</th>
-                    <td><a class='example-image-link text-center' href="${prop.after_pic3}" alt="no image" data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic3}" height="50" width="50"></a></td>
-                  </tr>
+                 
                   </tbody></table>`;
 
         $("#feature-info").html(content);
@@ -834,6 +834,7 @@ function getLine(id){
            $("#line" + id).addClass('bg-ch');
            pre_id = id;
            pre_llayer=true
+           sideRentis(parse_p.features[0].properties.name);
          }else if(pre_llayer==true){
            map.removeLayer(pre_llaye);
            $("#line"+pre_id).removeClass('bg-ch');
@@ -845,28 +846,65 @@ function getLine(id){
              $("#line" + id).addClass('bg-ch');
              pre_id = id;
              pre_llayer=true
+             sideRentis(parse_p.features[0].properties.name);
 
             
            }
          }
-          getRentis(parse_p.features[0].properties.name);
+          // getRentis(parse_p.features[0].properties.name);
+         
           rentis_name = '' ;
         }
       });
 }
 
-var rentis = '';
-var rentis_name = '';
-function getRentis(name) {
-  if (rentis_name === name) {
-    return false;
-  } 
-  // console.log(name);
+
+function sideRentis(name){
+  var side_name = name;
   $.ajax({
     type:'GET',
-    url:`Services/rentis.php?name=${name}`,
+    url:`Services/cycle.php?name=${name}`,
     success:function(data){
-      // console.log(JSON.parse(data).data);
+      console.log(data);
+     
+      var dat = JSON.parse(data);
+    
+
+      $("#Rentis").html(`<select name="select_cycle" id="select_cycle" onchange="getRentis('${side_name}')" class="form-control">
+                      <option value="" hidden>Select cycle</option>
+                     
+                      </select>`);
+      var p_c = '';
+      for(var i = 0 ; i<dat.length ;i++){
+        
+      $("#select_cycle").append(`<option value=${dat[i].cycle}>${dat[i].cycle}</option>`);
+
+
+    }
+
+  }
+})
+
+    
+
+  
+ 
+}
+
+var rentis = '';
+var rentis_name = '';
+var cycle = '';
+function getRentis(name) {
+  // if (rentis_name === name) {
+  //   return false;
+  // } 
+  cycle = $('#select_cycle').val();
+  // alert(cycle);
+  $.ajax({
+    type:'GET',
+    url:`Services/rentis.php?name=${name}&cycle=${cycle}`,
+    success:function(data){
+      console.log(data);
       rentis_name = name;
       var rentis_pars =  JSON.parse(data).data;
       var rentis = JSON.parse(rentis_pars[0].geojson);
@@ -875,7 +913,18 @@ function getRentis(name) {
       let prop = rentis.features[0].properties; 
       
 
-      var res_con = `<tbody>
+      var res_con = `
+      <select name="select_cycle" id="select_cycle" onchange="getRentis('${name }')" class="form-control">
+                      <option value="" hidden>Select cycle</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      </select>
+       <table class="table table-striped table-bordered table-condensed custom-table-css" >
+      <tbody>
                       <tr>
                         <th>Segment</th>
                         <td>${prop.segment}</td>
@@ -900,9 +949,13 @@ function getRentis(name) {
                       <th>Detail</th>
                       <td><button type="button" class="btn btn-sm btn-primary" onclick="detail(${parseInt(prop.lenght)},${parseInt(JSON.parse(data).complete)})">Detail</button></td>
                       </tr>
-                    </tbod>`;
+                    </tbod>
+                    </table>`;
 
                   $('#Rentis').html(res_con);
+                  
+
+                   
       }else{
         $('#Rentis').html("<tr><td>No Record Found</td></tr>");
       }

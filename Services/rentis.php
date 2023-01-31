@@ -15,7 +15,7 @@ class getRentis extends Connection
 
 
 
-	public function  loadData($name){
+	public function  loadData($name,$cycle){
 		// $name = $_GET['name'];
 		// return $name;
 
@@ -37,12 +37,14 @@ class getRentis extends Connection
 	        			 	 	'lenght',lenght
 			))))
 			 as geojson FROM (
-			 	select id, segment, vendor, geom, (select st_length(st_transform(geom,32650))/1000 from sabah_transmission where name = rentis.segment) as lenght,(SELECT distinct max(cycle::integer) from rentis where segment = '$name') as cycle  from rentis where segment = '$name') as tbl1 limit 1";
+			 	select id, segment, vendor, geom,cycle, (select st_length(st_transform(geom,32650))/1000 from sabah_transmission where name = rentis.segment) as lenght  from rentis where segment = '$name') as tbl1 limit 1";
 			$fname = explode(" -",$name);
 	 		
-				$sql1 = "with foo as (select max(cycle::integer) as cl,max(id) as id from rentis where segment ='$name')
-							select st_length(st_transform(st_makeline(a.geom,b.geom),32650))/1000 covered_distance  from pmu_sabah a,
-							(select g.* from rentis g,foo where segment ='$name' and cycle::integer=foo.cl and g.id=foo.id) b	where a.name ilike '%$fname[0]%'";
+				$sql1 = "with foo as (select max(id) as id from rentis where segment ='$name' and cycle='$cycle')
+select st_length(st_transform(st_makeline(a.geom,b.geom),32650))/1000 covered_distance  from pmu_sabah a,
+( 
+select g.* from rentis g,foo  where segment ='$name' and cycle='$cycle' and g.id=foo.id 
+) b	where a.name ilike '%$fname[0]%'";
 
 				try{
 				$result = 	pg_query( $sql1);
@@ -51,6 +53,7 @@ class getRentis extends Connection
 
 
 				$result2 = pg_query($sql2);
+
 				$res['data'] = pg_fetch_all($result2);
 				
 				}catch(Exception $e){
@@ -113,8 +116,9 @@ class getRentis extends Connection
 $json = new getRentis();
 if (isset($_GET['name'])) {
 	 $name = $_GET['name'];
+	 $cycle = $_GET['cycle'];
 	 // 
-	echo $json->loadData($name);
+	echo $json->loadData($name,$cycle);
 }else{
 	echo $json->getAllRentis();
 
