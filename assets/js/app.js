@@ -858,9 +858,11 @@ function getLine(id){
       });
 }
 
+var g_dat='';
 
 function sideRentis(name){
   var side_name = name;
+  g_dat ='';
   $.ajax({
     type:'GET',
     url:`Services/cycle.php?name=${name}`,
@@ -868,13 +870,13 @@ function sideRentis(name){
       console.log(data);
      
       var dat = JSON.parse(data);
-    
+      g_dat = dat;
 
       $("#Rentis").html(`<select name="select_cycle" id="select_cycle" onchange="getRentis('${side_name}')" class="form-control">
                       <option value="" hidden>Select cycle</option>
                      
                       </select>`);
-      var p_c = '';
+      
       for(var i = 0 ; i<dat.length ;i++){
         
       $("#select_cycle").append(`<option value=${dat[i].cycle}>${dat[i].cycle}</option>`);
@@ -884,10 +886,6 @@ function sideRentis(name){
 
   }
 })
-
-    
-
-  
  
 }
 
@@ -916,12 +914,7 @@ function getRentis(name) {
       var res_con = `
       <select name="select_cycle" id="select_cycle" onchange="getRentis('${name }')" class="form-control">
                       <option value="" hidden>Select cycle</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
+                      
                       </select>
        <table class="table table-striped table-bordered table-condensed custom-table-css" >
       <tbody>
@@ -953,6 +946,14 @@ function getRentis(name) {
                     </table>`;
 
                   $('#Rentis').html(res_con);
+
+console.log(g_dat);
+      for(var i = 0 ; i<g_dat.length ;i++){
+        
+      $("#select_cycle").append(`<option value=${g_dat[i].cycle}>${g_dat[i].cycle}</option>`);
+
+
+    }
                   
 
                    
