@@ -297,7 +297,7 @@ var pmu_ppu = L.geoJson(null, {
     //   iconUrl: 'http://localhost/sesb/assets/img/imagettw.png'
     // })
     var geojsonMarkerOptions = {
-      radius: 6g,
+      radius: 6,
       fillColor: "#00F700",
       color: "#000",
       weight: 1,
