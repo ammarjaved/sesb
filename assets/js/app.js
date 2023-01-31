@@ -296,15 +296,17 @@ var pmu_ppu = L.geoJson(null, {
     // var greenIcon = new LeafIcon({
     //   iconUrl: 'http://localhost/sesb/assets/img/imagettw.png'
     // })
+
+    var myIcon = L.divIcon({className: 'my-div-icon'});
     var geojsonMarkerOptions = {
       radius: 6,
       fillColor: "#00F700",
       color: "#000",
       weight: 1,
       opacity: 1,
-      fillOpacity: 0.8
+      fillOpacity: 0.8,
     };
-    return L.circleMarker(latlng,geojsonMarkerOptions);
+    return L.circleMarker(latlng,geojsonMarkerOptions).bindLabel('Even polylines can have labels.', { noHide: true });
   },
   onEachFeature: function (feature, layer) {
     if (feature.properties) {
