@@ -287,16 +287,24 @@ $.getJSON("Services/get_transmission_poles.php", function (data) {
 var  cell1,cell2,row;
 var pmu_ppu = L.geoJson(null, {
   pointToLayer: function (feature, latlng) {
-    var LeafIcon = L.Icon.extend({
-      options: {
-        iconSize:     [19, 46],
-        className: 'my-icon-green'
-      }
-    });
-    var greenIcon = new LeafIcon({
-      iconUrl: 'http://localhost/sesb/assets/img/imagettw.png'
-    })
-    return L.marker(latlng, {icon: greenIcon});
+    // var LeafIcon = L.Icon.extend({
+    //   options: {
+    //     iconSize:     [19, 46],
+    //     className: 'my-icon-green'
+    //   }
+    // });
+    // var greenIcon = new LeafIcon({
+    //   iconUrl: 'http://localhost/sesb/assets/img/imagettw.png'
+    // })
+    var geojsonMarkerOptions = {
+      radius: 6g,
+      fillColor: "#00F700",
+      color: "#000",
+      weight: 1,
+      opacity: 1,
+      fillOpacity: 0.8
+    };
+    return L.circleMarker(latlng,geojsonMarkerOptions);
   },
   onEachFeature: function (feature, layer) {
     if (feature.properties) {
