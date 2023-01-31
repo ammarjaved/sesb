@@ -306,7 +306,7 @@ var pmu_ppu = L.geoJson(null, {
       opacity: 1,
       fillOpacity: 0.8,
     };
-    return L.circleMarker(latlng,geojsonMarkerOptions).bindLabel('Even polylines can have labels.', { noHide: true });
+    return L.circleMarker(latlng,geojsonMarkerOptions);
   },
   onEachFeature: function (feature, layer) {
     if (feature.properties) {
@@ -919,15 +919,15 @@ function getRentis(name) {
     success:function(data){
       
       rentis_name = name;
-      var rentis =  JSON.parse(data).data;
-      // console.log(rentis_pars);
+      var rentis =  JSON.parse(data);
+      // console.log(rentis);
       // var rentis = JSON.parse(rentis_pars[0].geojson);
 
       if (rentis) {
 
       // let prop = rentis.features[0].properties; 
-        let prop = rentis[0];
-        console.log(prop);
+        var prop = rentis.data[0];
+       
       
 
       var res_con = `
@@ -963,10 +963,10 @@ function getRentis(name) {
                       </tr>
                     </tbod>
                     </table>`;
-
+                    console.log(prop);
                   $('#Rentis').html(res_con);
 
-console.log(g_dat);
+// console.log(g_dat);
       for(var i = 0 ; i<g_dat.length ;i++){
         
       $("#select_cycle").append(`<option value=${g_dat[i].cycle}>${g_dat[i].cycle}</option>`);
@@ -989,8 +989,9 @@ console.log(g_dat);
 
 
 function detail(lenght ,comp){
+
 var remain = (100*comp)/lenght;
-console.log(remain);
+
    $("#feature-info").html(`
       <div class="row">
         <div class='col-md-4'>

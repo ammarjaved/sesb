@@ -20,7 +20,7 @@ class getRentis extends Connection
 		// return $name;
 
 		$res =[];
-		$sql2="SELECT * from rentis where segment = '$name' and cycle = '$cycle' limit 1";
+		$sql2="SELECT *, (select st_length(st_transform(geom,32650))/1000 from sabah_transmission where name = rentis.segment) as lenght from rentis where segment = '$name' and cycle = '$cycle' ";
 			
 			$fname = explode(" -",$name);
 	 		
