@@ -297,7 +297,7 @@ var pmu_ppu = L.geoJson(null, {
     //   iconUrl: 'http://localhost/sesb/assets/img/imagettw.png'
     // })
     var geojsonMarkerOptions = {
-      radius: 6g,
+      radius: 6,
       fillColor: "#00F700",
       color: "#000",
       weight: 1,
@@ -384,6 +384,8 @@ var rentis_l = L.geoJson(null, {
       layer.on({
         click: function (e) {
           var prop = feature.properties;
+          
+
           var content = `<table class='table table-striped table-bordered table-condensed'>
           <tbody>
                     <tr>
@@ -399,11 +401,11 @@ var rentis_l = L.geoJson(null, {
                     <td>${prop.vendor}</td>
                   </tr>
                   <tr>
-                    <th>Alerdy Cleaned</th>
+                    <th>Already Cleaned</th>
                     <td>${prop.already_cleaned}</td>
                   </tr>
                   <tr>
-                    <th>Length</th>
+                    <th>Toatl Distance</th>
                     <td>${prop.lenght}</td>
                   </tr>
                   <tr>
@@ -423,7 +425,7 @@ var rentis_l = L.geoJson(null, {
 
                   <tr>
                     
-                    // <td class="text-center col-md-6"><a class='example-image-link text-center' href="${prop.before_pic3}" data-lightbox='example-set' data-title='Pic'><img src="${prop.before_pic3}" height="50" alt="no image uploaded" width="50"></a></td>
+                    <td class="text-center col-md-6"><a class='example-image-link text-center' href="${prop.before_pic3}" data-lightbox='example-set' data-title='Pic'><img src="${prop.before_pic3}" height="50" alt="no image uploaded" width="50"></a></td>
                     <td class="text-center col-md-6"><a class='example-image-link text-center' href="${prop.after_pic3}"  data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic3}" height="50" alt="no image uploaded" width="50"></a></td>
 
                   </tr>
@@ -904,24 +906,28 @@ function getRentis(name) {
   // if (rentis_name === name) {
   //   return false;
   // } 
+
   cycle = $('#select_cycle').val();
-  // alert(cycle);
-  $.ajax({
+
     type:'GET',
     url:`Services/rentis.php?name=${name}&cycle=${cycle}`,
     success:function(data){
-      console.log(data);
+      
       rentis_name = name;
-      var rentis_pars =  JSON.parse(data).data;
-      var rentis = JSON.parse(rentis_pars[0].geojson);
-      if (rentis.features !== null) {
+      var rentis =  JSON.parse(data).data;
+      // console.log(rentis_pars);
+      // var rentis = JSON.parse(rentis_pars[0].geojson);
 
-      let prop = rentis.features[0].properties; 
+      if (rentis) {
+
+      // let prop = rentis.features[0].properties; 
+        let prop = rentis[0];
+        console.log(prop);
       
 
       var res_con = `
       <select name="select_cycle" id="select_cycle" onchange="getRentis('${name }')" class="form-control">
-                      <option value="" hidden>Select cycle</option>
+                      <option value="" hidden>${cycle}</option>
                       
                       </select>
        <table class="table table-striped table-bordered table-condensed custom-table-css" >

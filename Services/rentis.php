@@ -20,31 +20,15 @@ class getRentis extends Connection
 		// return $name;
 
 		$res =[];
-		$sql2="SELECT 
-			json_build_object('type', 'FeatureCollection','crs',  
-				json_build_object('type','name', 'properties', 
-					json_build_object('name', 'EPSG:4326'  )),'features', 
-				json_agg( 
-					json_build_object(
-						'type','Feature','id',id,'geometry',ST_AsGeoJSON(geom)::json,
-	        			'properties',
-	        			 json_build_object(
-	        			 	'id', id,
-	        			 	'segment',segment, 
-	        			 	'cycle',cycle,
-	        			 	'vendor',vendor,
-	        			 	 'geom',geom, 
-	        			 	 	'lenght',lenght
-			))))
-			 as geojson FROM (
-			 	select id, segment, vendor, geom,cycle, (select st_length(st_transform(geom,32650))/1000 from sabah_transmission where name = rentis.segment) as lenght  from rentis where segment = '$name') as tbl1 limit 1";
+		$sql2="SELECT * from rentis where segment = '$name' and cycle = '$cycle' limit 1";
+			
 			$fname = explode(" -",$name);
 	 		
 				$sql1 = "with foo as (select max(id) as id from rentis where segment ='$name' and cycle='$cycle')
-select st_length(st_transform(st_makeline(a.geom,b.geom),32650))/1000 covered_distance  from pmu_sabah a,
-( 
-select g.* from rentis g,foo  where segment ='$name' and cycle='$cycle' and g.id=foo.id 
-) b	where a.name ilike '%$fname[0]%'";
+					select st_length(st_transform(st_makeline(a.geom,b.geom),32650))/1000 covered_distance  from pmu_sabah a,
+					( 
+					select g.* from rentis g,foo  where segment ='$name' and cycle='$cycle' and g.id=foo.id 
+					) b	where a.name ilike '%$fname[0]%'";
 
 				try{
 				$result = 	pg_query( $sql1);
@@ -118,6 +102,7 @@ if (isset($_GET['name'])) {
 	 $name = $_GET['name'];
 	 $cycle = $_GET['cycle'];
 	 // 
+
 	echo $json->loadData($name,$cycle);
 }else{
 	echo $json->getAllRentis();
