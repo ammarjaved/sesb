@@ -289,11 +289,12 @@ var pmu_ppu = L.geoJson(null, {
   pointToLayer: function (feature, latlng) {
     var LeafIcon = L.Icon.extend({
       options: {
-        iconSize:     [19, 46]
+        iconSize:     [19, 46],
+        className: 'my-icon-green'
       }
     });
     var greenIcon = new LeafIcon({
-      iconUrl: 'http://121.121.232.54:88/sesb/assets/img/pmu.png'
+      iconUrl: 'http://localhost/sesb/assets/img/imagettw.png'
     })
     return L.marker(latlng, {icon: greenIcon});
   },
@@ -375,8 +376,7 @@ var rentis_l = L.geoJson(null, {
       layer.on({
         click: function (e) {
           var prop = feature.properties;
-          var content = `
-          <table class='table table-striped table-bordered table-condensed'>
+          var content = `<table class='table table-striped table-bordered table-condensed'>
           <tbody>
                     <tr>
                     <th>Segment</th>
@@ -421,7 +421,7 @@ var rentis_l = L.geoJson(null, {
                   </tr>
                  
                   </tbody></table>`;
-
+                  $("#feature-title").html("Rentis Detail");
         $("#feature-info").html(content);
         $("#featureModal").modal("show");
            
@@ -858,9 +858,11 @@ function getLine(id){
       });
 }
 
+var g_dat='';
 
 function sideRentis(name){
   var side_name = name;
+  g_dat ='';
   $.ajax({
     type:'GET',
     url:`Services/cycle.php?name=${name}`,
@@ -868,13 +870,13 @@ function sideRentis(name){
       console.log(data);
      
       var dat = JSON.parse(data);
-    
+      g_dat = dat;
 
       $("#Rentis").html(`<select name="select_cycle" id="select_cycle" onchange="getRentis('${side_name}')" class="form-control">
                       <option value="" hidden>Select cycle</option>
                      
                       </select>`);
-      var p_c = '';
+      
       for(var i = 0 ; i<dat.length ;i++){
         
       $("#select_cycle").append(`<option value=${dat[i].cycle}>${dat[i].cycle}</option>`);
@@ -884,10 +886,6 @@ function sideRentis(name){
 
   }
 })
-
-    
-
-  
  
 }
 
@@ -916,12 +914,7 @@ function getRentis(name) {
       var res_con = `
       <select name="select_cycle" id="select_cycle" onchange="getRentis('${name }')" class="form-control">
                       <option value="" hidden>Select cycle</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
+                      
                       </select>
        <table class="table table-striped table-bordered table-condensed custom-table-css" >
       <tbody>
@@ -953,6 +946,14 @@ function getRentis(name) {
                     </table>`;
 
                   $('#Rentis').html(res_con);
+
+console.log(g_dat);
+      for(var i = 0 ; i<g_dat.length ;i++){
+        
+      $("#select_cycle").append(`<option value=${g_dat[i].cycle}>${g_dat[i].cycle}</option>`);
+
+
+    }
                   
 
                    
@@ -1049,4 +1050,73 @@ function pieChart(a,b){
         }]
     });
 }
+
+function teast(){
+  alert("asdasd");
+}
+
+
+// function typeaheadsearch(){
+
+//     $('.typeahead').unbind('typeahead');
+//     var tblname;
+       
+
+//         $('#search_input1').typeahead({
+//             name: 'hce1',
+//             remote:'services/search.php?key=%QUERY'+ "&tblname=so",
+//             limit: 5
+//         });
+
+//         $('#search_input2').typeahead({
+//             name: 'hce2',
+//             remote:'services/search.php?key=%QUERY'+ "&tblname=meter_no",
+//             limit: 5
+//         });
+
+       
+//     }
+
+// var substringMatcher = function(strs) {
+//   return function findMatches(q, cb) {
+//     var matches, substringRegex;
+
+//     // an array that will be populated with substring matches
+//     matches = [];
+
+//     // regex used to determine if a string contains the substring `q`
+//     substrRegex = new RegExp(q, 'i');
+
+//     // iterate through the pool of strings and for any string that
+//     // contains the substring `q`, add it to the `matches` array
+//     $.each(strs, function(i, str) {
+//       if (substrRegex.test(str)) {
+//         matches.push(str);
+//       }
+//     });
+
+//     cb(matches);
+//   };
+// };
+
+// var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
+//   'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',
+//   'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
+//   'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
+//   'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
+//   'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
+//   'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
+//   'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
+//   'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+// ];
+
+// $('#the-basics .typeahead').typeahead({
+//   hint: true,
+//   highlight: true,
+//   minLength: 1
+// },
+// {
+//   name: 'states',
+//   source: substringMatcher(states)
+// });
 

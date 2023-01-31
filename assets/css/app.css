@@ -10,6 +10,10 @@ input[type="radio"], input[type="checkbox"] {
   margin: 0;
 }
 
+.my-icon-green{
+border-radius: 50%;
+}
+
 .mt-4{
 margin-top:10px;
 }
