@@ -149,6 +149,8 @@ class Rentis extends Connection
 		
 		$arr = [];
 
+
+
 		$destination = "../assets/Images/";
 		$web_des = "http://121.121.232.54:88/sesb/assets/Images/";   
 
@@ -163,6 +165,14 @@ class Rentis extends Connection
 			return json_encode($arr);
 
 		 }
+		 $rec  = "SELECT * from rentis where id = $id";
+		 $recQ = pg_query($rec);
+		 
+		 	
+		 $recF = pg_fetch_all($recQ);
+
+		 // return $recF[0]['id'];
+		 if ($recF != null) {
 
 		if (isset($_FILES['after_pic1'])) {
 
@@ -175,8 +185,9 @@ class Rentis extends Connection
 
 		    }
 		}else{
-			$a_1 = '';
+			$a_1 = $recF[0]['after_pic1'];
 		}
+
 
 	   
 
@@ -190,7 +201,7 @@ class Rentis extends Connection
 
 		    }
 		}else{
-			$a_2 = '';
+			$a_2 = $recF[0]['after_pic2'];
 		}
 
 
@@ -204,14 +215,21 @@ class Rentis extends Connection
 
 		    }
 		}else{
-			$a_3 = '';
+			$a_3 = $recF[0]['after_pic3'];;
 		}
 
-		$status = $_REQUEST['status'];
+
+		if (isset($_REQUEST['status'])) {
+
+			$status = $_REQUEST['status'];
+		}else{
+			$status = $recF[0]['status'];
+		}
+		
 	    
 
-		$query = "UPDATE rentis SET after_pic1 = '$a_1', after_pic2 = '$a_2', after_pic3 = '$a_3',$status='$status' WHERE id = $id";
-
+		$query = "UPDATE rentis SET after_pic1 = '$a_1', after_pic2 = '$a_2', after_pic3 = '$a_3',status='$status' WHERE id = $id";
+		// return $query;
 		try{
 
 			pg_query($query);
@@ -223,6 +241,11 @@ class Rentis extends Connection
 			$arr['message']	= $e->getMessage();
 			
 		}
+
+	}else{
+		$arr['status'] 	= "failed";
+			$arr['message']	= 'user not found';
+	}
 
 	$this->closeConnection();
 
@@ -238,6 +261,7 @@ $type = (isset($_GET['type'])) ? $_GET['type'] : 'empty';
 if ($type == "insert") {
 	echo $json->upload();
 }elseif ($type == "update") {
+	// echo $_REQUEST['id'];
 	echo $json->update();
 }else{
 	$arr = [];
