@@ -416,8 +416,8 @@ var rentis_l = L.geoJson(null, {
                     <td>${parseInt(prop.lenght)} (KM)</td>
                   </tr>
                   <tr>
-                    <th class="text-center">Before pic </th>
-                    <th class="text-center" >After pic</th>
+                    <th class="text-center">Before Images </th>
+                    <th class="text-center" >After Images</th>
                   </tr>
                   <tr>
                     <td class="text-center"><a class='example-image-link text-center' href="${prop.before_pic1}" data-lightbox='example-set' data-title='Pic'><img src="${prop.before_pic1}" height="50" alt="no image uploaded" width="50"></a></td>
@@ -473,9 +473,9 @@ map = L.map("map", {
   zoomControl: false,
   attributionControl: false
 });
-setTimeout(function(){
-  L.Control.boxzoom({ position:'topleft' }).addTo(map);
-},2000)
+// setTimeout(function(){
+//   L.Control.boxzoom({ position:'topleft' }).addTo(map);
+// },2000)
 
 /* Layer control listeners that allow for a single markerClusters layer */
 map.on("overlayadd", function(e) {
