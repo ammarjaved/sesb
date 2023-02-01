@@ -473,7 +473,7 @@ map = L.map("map", {
   zoomControl: false,
   attributionControl: false
 });
-L.Control.boxzoom({ position:'topleft' }).addTo(map);
+// L.Control.boxzoom({ position:'topleft' }).addTo(map);
 
 /* Layer control listeners that allow for a single markerClusters layer */
 map.on("overlayadd", function(e) {
