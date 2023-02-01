@@ -659,47 +659,13 @@ var baseLayers = {
   "Aerial Imagery": usgsImagery
 };
 
-
-var OWM_API_KEY = 'f6912b4e43460266a19b6d984d6b2610';
-//var overlayObj={
-//    "portalLayers":geolayers
-//}
-setTimeout(function(){
-var clouds = L.OWM.clouds({showLegend: false, opacity: 0.5, appId: OWM_API_KEY});
-var cloudscls = L.OWM.cloudsClassic({opacity: 0.5, appId: OWM_API_KEY});
-var precipitation = L.OWM.precipitation( {opacity: 0.5, appId: OWM_API_KEY} );
-var precipitationcls = L.OWM.precipitationClassic({opacity: 0.5, appId: OWM_API_KEY});
-var rain = L.OWM.rain({opacity: 0.5, appId: OWM_API_KEY});
-var raincls = L.OWM.rainClassic({opacity: 0.5, appId: OWM_API_KEY});
-var snow = L.OWM.snow({opacity: 0.5, appId: OWM_API_KEY});
-var pressure = L.OWM.pressure({opacity: 0.4, appId: OWM_API_KEY});
-var pressurecntr = L.OWM.pressureContour({opacity: 0.5, appId: OWM_API_KEY});
-var temp = L.OWM.temperature({opacity: 0.5, appId: OWM_API_KEY});
-var wind = L.OWM.wind({opacity: 0.5, appId: OWM_API_KEY});
-//  var city = L.OWM.current({intervall: 15, lang: 'de', markerFunction: myOwmMarker, popupFunction: myOwmPopup});
-
-// add layer groups to layer switcher control
-var overlayMaps = { "Clouds": clouds,"CloudHistory":cloudscls,"Precipitation":precipitation,"precipitationHistory":precipitationcls,"Rain":rain,"RainHistory":raincls,"Snow":snow,"Pressure":pressure,"Pressure Contours":pressurecntr,"Temprature":temp,"Wind":wind };
-
-
 var groupedOverlays = {
   "Points of Interest": {
     "Transmission Line": theaterLayer,
     "Transmission 20m Buffer": museumLayer,
     "Poles": poles,
     "PMU":pmu_ppu,
-    "Rentis":rentis_l,
-    "Clouds": clouds,
-    "CloudHistory":cloudscls,
-    "Precipitation":precipitation,
-    "precipitationHistory":precipitationcls,
-    "Rain":rain,
-    "RainHistory":raincls,
-    "Snow":snow,
-    "Pressure":pressure,
-    "Pressure Contours":pressurecntr,
-    "Temprature":temp,
-    "Wind":wind
+    "Rentis":rentis_l
   },
   "Reference": {
     "Sabah": boroughs
@@ -709,7 +675,7 @@ var groupedOverlays = {
 var layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
   collapsed: isCollapsed
 }).addTo(map);
-},2000)
+
 /* Highlight search box text on click */
 $("#searchbox").click(function () {
   $(this).select();
