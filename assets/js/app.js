@@ -495,7 +495,7 @@ if (topB) {
 }
   val = $("#t-select").val();
   if(val === "Kolopis- Melawa"){
-  $.getJSON("assets/Kolopis_Melawa/Vegetation_Kolopis_Melawa.geojson", function (data) {
+  $.getJSON("assets/New folder/Vegetation_Kolopis_Melawa.geojson", function (data) {
     console.log(data);
     topB = L.geoJson(data).addTo(map);
 
