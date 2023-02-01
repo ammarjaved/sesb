@@ -15,7 +15,8 @@ class PmuId extends Connection
 
 	public function getResult()
 	{
-		$query  = "SELECT name FROM pmu_sabah where name ilike '%%'";
+		$key = $_REQUEST['key'];
+		$query  = "SELECT name FROM pmu_sabah where name ilike '%{$key}%' limit 10";
 		$result = pg_query($query);
 		$res    = pg_fetch_all($result);
 

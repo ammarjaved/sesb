@@ -19,6 +19,22 @@ table#Connectivity {
     margin: 5%;
     width: 90%;s
 }
+
+#pmu_search_ul{
+  position: absolute;
+  right: 10%;
+  top: 5%;
+}
+/*input[type=text]#fname {
+padding: 10px;
+}*/
+input:focus{
+    outline: none;
+}
+#search_input1{
+
+border: 0px;  
+}
 .my-icon-green{
 border-radius: 50%;
 }

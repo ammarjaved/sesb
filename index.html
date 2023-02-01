@@ -70,9 +70,18 @@
 <!--                  <li><a href="data/DOITT_MUSEUM_01_13SEPT2010.geojson" download="museums.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Museums</a></li>-->
 <!--                </ul>-->
 <!--            </li>-->
+
             <li class="hidden-xs"><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="list-btn"><i class="fa fa-list white"></i>&nbsp;&nbsp;Sidebar Toggle</a></li>
+  
           </ul>
+
+          <ul id="pmu_search_ul">
+            <li><input type="text" id="search_input1" name="search1" placeholder="Search DeviceID..." class="typeahead" >
+          <button onclick="searchButton()" type="button" class="btn btn-success btn-sm">Search</button></li>
+          </ul>
+
         </div><!--/.navbar-collapse -->
+
       </div>
     </div>
 
@@ -1389,6 +1398,7 @@
 <!--  <div id="the-basics">
   <input class="typeahead tt-query"  type="text" placeholder="States of USA" id="search_input1">
 </div> -->
+
 
           </div>
         </div>

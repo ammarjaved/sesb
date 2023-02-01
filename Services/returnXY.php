@@ -15,9 +15,10 @@ class PmuId extends Connection
 
 	public function getResult()
 	{
-		$query = "SELECT name FROM pmu_sabah";
-		$result = pg_query($query);
-		$res = pg_fetch_all($result);
+		$name 	=  $_REQUEST['name'];
+		$query 	=  "select st_x(geom) as x,st_y(geom) as y from pmu_sabah where name = '$name'";
+		$result =  pg_query($query);
+		$res 	=  pg_fetch_all($result);
 
 		$this->closeConnection();
 

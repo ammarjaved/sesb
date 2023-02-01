@@ -246,8 +246,8 @@ var museums = L.geoJson(null, {
     }
   }
 });
-$.getJSON("data/transmission_20m_buffer.geojson", function (data) {
-  museums.addData(data);
+$.getJSON("Services/buffer.php", function (data) {
+  museums.addData(JSON.parse(data[0].geojson));
 });
 
 
@@ -1210,3 +1210,34 @@ function typeaheadsearch(){
 //         source: cars
 //     });
 // });  
+
+
+$(document).ready(function(){
+
+  $('#search_input1').typeahead({
+                name: 'hce1',
+                remote:'services/search.php?key=%QUERY',
+                limit: 5
+            }); 
+})
+
+
+function searchButton(){
+  var sName = '';
+  sName = $("#search_input1").val();
+  $.ajax({
+                url: "services/returnXY.php?name="+ sName,
+                type: "GET",
+                async: false,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function callback(response) {
+                   console.log(response);
+                   var latlng=[response[0].y, response[0].x]
+                    map.setView(latlng,19);
+                    // L.marker(latlng).addTo(map);
+                              highlight.clearLayers().addLayer(L.circleMarker(latlng, highlightStyle));
+
+                }
+            });
+}
