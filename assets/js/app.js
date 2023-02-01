@@ -996,7 +996,7 @@ var remain = (100*comp)/lenght;
       <div class="row">
         <div class='col-md-4'>
           <div class="card">
-          <div class="card-title"><h4>Total Area</h4></div>
+          <div class="card-title"><h4>Total Distance</h4></div>
             <h6>${lenght} KM</h6>
           </div>
         </div>
