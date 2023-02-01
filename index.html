@@ -26,7 +26,7 @@
     <link rel="apple-touch-icon" sizes="152x152" href="assets/img/favicon-152.png">
     <link rel="icon" sizes="196x196" href="assets/img/favicon-196.png">
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
-
+<link rel="stylesheet" href="assets/L.Control.BoxZoom-master/dist/leaflet-control-boxzoom.css">
   
 
    
@@ -56,6 +56,18 @@
               <a id="toolsDrop" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-globe white"></i>&nbsp;&nbsp;Tools <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="full-extent-btn"><i class="fa fa-arrows-alt"></i>&nbsp;&nbsp;Zoom To Full Extent</a></li>
+                <!-- <li><div class="s-div"> -->
+             <!--  <select name="icor" class="t-select" id="t-select" >
+              <option value="">SELECT</option>         
+                <option value="Menggaris-kudat"> Menggaris-kudat</option>
+                <option value="Unggun-Melawa"> Unggun-Melawa</option>
+                <option value="Unggun-UMS"> Unggun-UMS</option>
+                <option value="Lok kawi- Lansat"> Lok kawi- Lansat</option>
+                <option value="Kolopis- Melawa"> Kolopis- Melawa</option>
+                <option value="Dunggun - Kota Belud"> Dunggun - Kota Belud</option>
+              </select>
+              <button onclick="topBarSelect()" type="button">Calculate</button>
+              </div> --></li>
 <!--                <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="legend-btn"><i class="fa fa-picture-o"></i>&nbsp;&nbsp;Show Legend</a></li>-->
                 <li class="divider hidden-xs"></li>
 <!--                <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="login-btn"><i class="fa fa-user"></i>&nbsp;&nbsp;Login</a></li>-->
@@ -76,8 +88,27 @@
           </ul>
 
           <ul id="pmu_search_ul">
-            <li><input type="text" id="search_input1" name="search1" placeholder="Search DeviceID..." class="typeahead" >
-          <button onclick="searchButton()" type="button" class="btn btn-success btn-sm">Search</button></li>
+            <li>
+              <div class="s-div">
+              <select name="icor" class="t-select" id="t-select" >
+              <option value="">SELECT</option>         
+                <option value="Menggaris-kudat"> Menggaris-kudat</option>
+                <option value="Unggun-Melawa"> Unggun-Melawa</option>
+                <option value="Unggun-UMS"> Unggun-UMS</option>
+                <option value="Lok kawi- Lansat"> Lok kawi- Lansat</option>
+                <option value="Kolopis- Melawa"> Kolopis- Melawa</option>
+                <option value="Dunggun - Kota Belud"> Dunggun - Kota Belud</option>
+              </select>
+              <button onclick="topBarSelect()" type="button">Calculate</button>
+              </div>
+            </li>
+            <li>
+              <div class="in-div"> 
+              <input type="text" id="search_input1" name="search1" placeholder="Search DeviceID..." class="typeahead " >
+          <button onclick="searchButton()" type="button" class="">Search</button>
+        </div>
+        </li>
+        <li><button class="cls" type="button" onclick="removeTop()">clear</button></li>
           </ul>
 
         </div><!--/.navbar-collapse -->
@@ -1572,6 +1603,7 @@
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="assets/lib/typeahead.min.js"></script>
+    <script src="assets/L.Control.BoxZoom-master/dist/leaflet-control-boxzoom.js"></script>
     
   </body>
 </html>

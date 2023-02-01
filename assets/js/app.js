@@ -386,7 +386,12 @@ var rentis_l = L.geoJson(null, {
       layer.on({
         click: function (e) {
           var prop = feature.properties;
-          
+          var mR = '';
+          if(prop.already_cleaned === true){
+            mR = 'yes';
+          }else{
+            mR = 'No';
+          }
 
           var content = `<table class='table table-striped table-bordered table-condensed'>
           <tbody>
@@ -403,12 +408,12 @@ var rentis_l = L.geoJson(null, {
                     <td>${prop.vendor}</td>
                   </tr>
                   <tr>
-                    <th>Already Cleaned</th>
-                    <td>${prop.already_cleaned}</td>
+                    <th>Rentis need to be done</th>
+                    <td>${mR}</td>
                   </tr>
                   <tr>
-                    <th>Toatl Distance</th>
-                    <td>${parseInt(prop.lenght)}</td>
+                    <th>Total Distance</th>
+                    <td>${parseInt(prop.lenght)} (KM)</td>
                   </tr>
                   <tr>
                     <th class="text-center">Before pic </th>
@@ -468,6 +473,7 @@ map = L.map("map", {
   zoomControl: false,
   attributionControl: false
 });
+L.Control.boxzoom({ position:'topleft' }).addTo(map);
 
 /* Layer control listeners that allow for a single markerClusters layer */
 map.on("overlayadd", function(e) {
@@ -480,6 +486,63 @@ map.on("overlayadd", function(e) {
   //  syncSidebar();
   }
 });
+
+var topB="";
+function topBarSelect() {
+  var val;
+if (topB) {
+  map.removeLayer(topB);
+}
+  val = $("#t-select").val();
+  if(val === "Kolopis- Melawa"){
+  $.getJSON("assets/Kolopis_Melawa/Vegetation_Kolopis_Melawa.geojson", function (data) {
+    console.log(data);
+    topB = L.geoJson(data).addTo(map);
+
+  })
+}
+  if(val === "Dunggun - Kota Belud"){
+  $.getJSON("assets/New folder/Dunggun_Kota Belud.geojson", function (data) {
+    console.log(data);
+    topB = L.geoJson(data).addTo(map);
+
+  })
+}
+  if(val === "Lok kawi- Lansat"){
+  $.getJSON("assets/New folder/Lok Kawi_Lansat.geojson", function (data) {
+    console.log(data);
+    topB = L.geoJson(data).addTo(map);
+
+  })
+}
+  if(val === "Menggaris-kudat"){
+  $.getJSON("assets/New folder/Menggaris_Kudat.geojson", function (data) {
+    console.log(data);
+    topB = L.geoJson(data).addTo(map);
+
+  })
+}
+  if(val === "Unggun-Melawa"){
+  $.getJSON("assets/New folder/Unggun_Melawa.geojson", function (data) {
+    console.log(data);
+    topB = L.geoJson(data).addTo(map);
+
+  })
+}
+  if(val === "Unggun-UMS"){
+  $.getJSON("assets/New folder/Unggun_UMS.geojson", function (data) {
+    console.log(data);
+    topB = L.geoJson(data).addTo(map);
+
+  })
+}
+}
+
+function removeTop(){
+if (topB) {
+  map.removeLayer(topB);
+}
+}
 
 map.on("overlayremove", function(e) {
   if (e.layer === theaterLayer) {
@@ -951,11 +1014,11 @@ function getRentis(name) {
                       </tr>
                       <tr>
                         <th>Total distance</th>
-                        <td> ${parseInt(prop.lenght)} KM</td>
+                        <td> ${parseInt(prop.lenght)} (KM)</td>
                       </tr>
                       <tr>
                         <th>Distance covered</th>
-                        <td> ${parseInt(JSON.parse(data).complete)} KM</td>
+                        <td> ${parseInt(JSON.parse(data).complete)} (KM)</td>
                       </tr>
                       <tr>
                       <th>Detail</th>
@@ -997,19 +1060,19 @@ var remain = (100*comp)/lenght;
         <div class='col-md-4'>
           <div class="card">
           <div class="card-title"><h4>Total Distance</h4></div>
-            <h6>${lenght} KM</h6>
+            <h6>${lenght} (KM)</h6>
           </div>
         </div>
         <div class='col-md-4'>
           <div class="card">
           <div class="card-title"><h4>Total Remaining</h4></div>
-            <h6>${parseInt(lenght-comp)} KM</h6>
+            <h6>${parseInt(lenght-comp)} (KM)</h6>
           </div>
         </div>
         <div class='col-md-4'>
           <div class="card">
           <div class="card-title"><h4>Total Covered</h4></div>
-            <h6>${comp} KM</h6>
+            <h6>${comp} (KM)</h6>
           </div>
         </div>
       </div>
