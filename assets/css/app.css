@@ -9,7 +9,16 @@ body {
 input[type="radio"], input[type="checkbox"] {
   margin: 0;
 }
-
+#Rentis{
+  padding: 5%;
+}
+select#select_cycle {
+    margin-bottom: 5%;
+}
+table#Connectivity {
+    margin: 5%;
+    width: 90%;s
+}
 .my-icon-green{
 border-radius: 50%;
 }

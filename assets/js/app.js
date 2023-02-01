@@ -959,7 +959,7 @@ function getRentis(name) {
                       </tr>
                       <tr>
                       <th>Detail</th>
-                      <td><button type="button" class="btn btn-sm btn-primary" onclick="detail(${parseInt(prop.lenght)},${parseInt(JSON.parse(data).complete)})">Detail</button></td>
+                      <td class="text-center"><button type="button" class="btn btn-sm btn-primary" onclick="detail(${parseInt(prop.lenght)},${parseInt(JSON.parse(data).complete)})">Detail</button></td>
                       </tr>
                     </tbod>
                     </table>`;
@@ -1076,26 +1076,22 @@ function teast(){
 }
 
 
-// function typeaheadsearch(){
+function typeaheadsearch(){
 
-//     $('.typeahead').unbind('typeahead');
-//     var tblname;
+    $('.typeahead').unbind('typeahead');
+    var tblname;
        
 
-//         $('#search_input1').typeahead({
-//             name: 'hce1',
-//             remote:'services/search.php?key=%QUERY'+ "&tblname=so",
-//             limit: 5
-//         });
+        $('#search_input1').typeahead({
+            name: 'hce1',
+            remote:'Services/search.php?key=%QUERY',
+            limit: 5
+        });
 
-//         $('#search_input2').typeahead({
-//             name: 'hce2',
-//             remote:'services/search.php?key=%QUERY'+ "&tblname=meter_no",
-//             limit: 5
-//         });
+
 
        
-//     }
+    }
 
 // var substringMatcher = function(strs) {
 //   return function findMatches(q, cb) {
@@ -1140,3 +1136,77 @@ function teast(){
 //   source: substringMatcher(states)
 // });
 
+
+
+// var substringMatcher = function(strs) {
+//   console.log('strs', strs);
+//   return function findMatches(q, cb) {
+//     console.log('q', q);
+//     var matches, substringRegex;
+
+//     // an array that will be populated with substring matches
+//     matches = [];
+//     console.log('matches', matches);
+
+//     // regex used to determine if a string contains the substring `q`
+//     substrRegex = new RegExp(q, 'i');
+
+//     // iterate through the pool of strings and for any string that
+//     // contains the substring `q`, add it to the `matches` array
+//     $.each(strs, function(i, str) {
+//       if (substrRegex.test(str)) {
+//         matches.push(str);
+//       }
+//     });
+    
+//     console.log('matches', matches);
+
+//     cb(matches);
+//   };
+// };
+
+// var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
+//   'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',
+//   'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
+//   'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
+//   'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
+//   'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
+//   'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
+//   'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
+//   'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+// ];
+
+// $('#the-basics .typeahead').typeahead({
+//   hint: true,
+//   highlight: true,
+//   minLength: 1
+// },
+// {
+//   name: 'states',
+//   source: substringMatcher(states)
+// });
+
+
+
+// $(document).ready(function(){
+//     // Defining the local dataset
+//     var cars = ['Audi', 'BMW', 'Bugatti', 'Ferrari', 'Ford', 'Lamborghini', 'Mercedes Benz', 'Porsche', 'Rolls-Royce', 'Volkswagen'];
+    
+//     // Constructing the suggestion engine
+//     var cars = new Bloodhound({
+//         datumTokenizer: Bloodhound.tokenizers.whitespace,
+//         queryTokenizer: Bloodhound.tokenizers.whitespace,
+//         local: cars
+//     });
+    
+//     // Initializing the typeahead
+//     $('.typeahead').typeahead({
+//         hint: true,
+//         highlight: true, /* Enable substring highlighting */
+//         minLength: 1 /* Specify minimum characters required for showing result */
+//     },
+//     {
+//         name: 'cars',
+//         source: cars
+//     });
+// });  
