@@ -1,0 +1,48 @@
+<html>
+<head>
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+    <script src="https://api.windy.com/assets/map-forecast/libBoot.js"></script>
+    <style>
+        #windy {
+            width: 100%;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+<div id="windy"></div>
+<script>
+
+    const options = {
+        // Required: API key
+        key: 'PsLAtXpsPTZexBwUkO7Mx5I', // REPLACE WITH YOUR KEY !!!
+
+        // Put additional console output
+        verbose: true,
+
+        // Optional: Initial state of the map 117.129598340844
+        lat: 117.129598340844,
+        lon: 5.35424165019849,
+        zoom: 5,
+    };
+
+    // Initialize Windy API
+    windyInit(options, windyAPI => {
+        // windyAPI is ready, and contain 'map', 'store',
+        // 'picker' and other usefull stuff
+
+        const { map } = windyAPI;
+        // .map is instance of Leaflet map
+
+        L.popup()
+            .setLatLng([117.129598340844,5.35424165019849])
+            .setContent('SABAH')
+            .openOn(map);
+    });
+</script>
+</body>
+</html>
