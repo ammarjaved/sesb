@@ -408,7 +408,7 @@ var rentis_l = L.geoJson(null, {
                   </tr>
                   <tr>
                     <th>Toatl Distance</th>
-                    <td>${prop.lenght}</td>
+                    <td>${parseInt(prop.lenght)}</td>
                   </tr>
                   <tr>
                     <th class="text-center">Before pic </th>

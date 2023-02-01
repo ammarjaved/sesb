@@ -112,13 +112,13 @@ class Rentis extends Connection
 	    
 
 	    
-		$segment = 	(isset($_REQUEST['segment'])) ? $_REQUEST['segment'] : '' ;
-		$cycle   =	(isset($_REQUEST['cycle'])) ? $_REQUEST['cycle'] : '' ;
-		$vendor  =	(isset($_REQUEST['vendor'])) ? $_REQUEST['vendor'] : '' ;
-		$lat 	 =	(isset($_REQUEST['lat'])) ? $_REQUEST['lat'] : '' ;
-		$lon 	 = 	(isset($_REQUEST['lon'])) ? $_REQUEST['lon'] : '' ;
-		$cleaned = 	(isset($_REQUEST['already_cleaned'])) ? $_REQUEST['already_cleaned'] : '' ;
-		$status  =  (isset($_REQUEST['status'])) ? $_REQUEST['status'] : '' ;
+		$segment = 	(isset($_REQUEST['segment']))   		? 	$_REQUEST['segment'] : '' ;
+		$cycle   =	(isset($_REQUEST['cycle'])) 			? 	$_REQUEST['cycle'] : '' ;
+		$vendor  =	(isset($_REQUEST['vendor'])) 			? 	$_REQUEST['vendor'] : '' ;
+		$lat 	 =	(isset($_REQUEST['lat'])) 				? 	$_REQUEST['lat'] : '' ;
+		$lon 	 = 	(isset($_REQUEST['lon'])) 				? 	$_REQUEST['lon'] : '' ;
+		$cleaned = 	(isset($_REQUEST['already_cleaned'])) 	? 	$_REQUEST['already_cleaned'] : '' ;
+		$status  =  (isset($_REQUEST['status'])) 			? 	$_REQUEST['status'] : '' ;
 
 
 		$query = "INSERT INTO rentis (
@@ -206,9 +206,11 @@ class Rentis extends Connection
 		}else{
 			$a_3 = '';
 		}
+
+		$status = $_REQUEST['status'];
 	    
 
-		$query = "UPDATE rentis SET after_pic1 = '$a_1', after_pic2 = '$a_2', after_pic3 = '$a_3' WHERE id = $id";
+		$query = "UPDATE rentis SET after_pic1 = '$a_1', after_pic2 = '$a_2', after_pic3 = '$a_3',$status='$status' WHERE id = $id";
 
 		try{
 
