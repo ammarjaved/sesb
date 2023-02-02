@@ -387,8 +387,9 @@ var rentis_l = L.geoJson(null, {
         click: function (e) {
           var prop = feature.properties;
           var mR = '';
-          if(prop.already_cleaned === true){
+          if(prop.already_cleaned === "false"){
             mR = 'yes';
+
           }else{
             mR = 'No';
           }
@@ -420,27 +421,43 @@ var rentis_l = L.geoJson(null, {
                     <th class="text-center" >After Images</th>
                   </tr>
                   <tr>
-                    <td class="text-center"><img onclick='openPanodata("${prop.before_pic1}")' src="${prop.before_pic1}" height="50" alt="no image uploaded" width="50"></td>
-                    <td class="text-center"><img onclick='openPanodata("${prop.after_pic1}")' src="${prop.after_pic1}" alt="no image uploaded" height="50" width="50"></td>
+                    <td class="text-center"><img onclick='openPanodata("${prop.before_pic1}")' src="${prop.before_pic1}" height="50"  alt="NO Image Required" width="50"></td>
+                    <td class="text-center"><div id="set_con1"><img onclick='openPanodata("${prop.after_pic1}")' src="${prop.after_pic1}" alt="NO Image Required" onerror="this.src='assets/img/no_image.jpg'" height="50" width="50"></div></td>
                   </tr>
 
                   <tr>
-                   <td class="text-center"><img onclick='openPanodata("${prop.before_pic1}")' src="${prop.before_pic2}" height="50" alt="no image uploaded" width="50"></td>
-                    <td class="text-center"><img onclick='openPanodata("${prop.after_pic1}")' src="${prop.after_pic2}" alt="no image uploaded" height="50" width="50"></td>
+                   <td class="text-center"><img onclick='openPanodata("${prop.before_pic2}")' src="${prop.before_pic2}" height="50" alt="NO Image Required" width="50"></td>
+                    <td class="text-center"><div id="set_con2"><img onclick='openPanodata("${prop.after_pic2}")' src="${prop.after_pic2}" alt="NO Image Required" height="50" onerror="this.src='assets/img/no_image.jpg'" width="50"></div></td>
                   </tr>
 
 
                   <tr>
                     
- <td class="text-center"><img onclick='openPanodata("${prop.before_pic1}")' src="${prop.before_pic3}" height="50" alt="no image uploaded" width="50"></td>
-                    <td class="text-center"><img onclick='openPanodata("${prop.after_pic1}")' src="${prop.after_pic3git }" alt="no image uploaded" height="50" width="50"></td>
+ <td class="text-center"><img onclick='openPanodata("${prop.before_pic3}")' src="${prop.before_pic3}" height="50" alt="NO Image Required" width="50"></td>
+                    <td class="text-center"><div id="set_con3"><img onclick='openPanodata("${prop.after_pic3}")' src="${prop.after_pic3}" alt="NO Image Required" onerror="this.src='assets/img/no_image.jpg'" height="50" width="50"></div></td>
                   </tr>
                  
                   </tbody></table>`;
                   $("#feature-title").html("Rentis Detail");
         $("#feature-info").html(content);
         $("#featureModal").modal("show");
-           
+        setTimeout(function(){
+
+                  if(prop.already_cleaned === "false"){
+            if(prop.after_pic1==""){
+              $("#set_con1").html("No Image Uploaded")
+            }
+            if(prop.after_pic2==""){
+              $("#set_con2").html("No Image Uploaded")
+            }
+            if(prop.after_pic3==""){
+              $("#set_con3").html("No Image Uploaded")
+            }
+
+          }
+        },300)
+
+
 // highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
          
 
