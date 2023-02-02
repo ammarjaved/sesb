@@ -926,11 +926,15 @@ function getLine(id){
         // console.log(data);
          let  parse_data =  JSON.parse(data);
          let parse_p = JSON.parse(parse_data[0].geojson);
+         //console.log(parse_p.getBounds());
+       // map.fitBounds(parse_p.getBounds());
+
          
          var style={ color:"#00FFFF"}
          if(pre_llayer==false) {
            pre_llaye = L.geoJson(parse_p, style)
            map.addLayer(pre_llaye);
+           map.fitBounds(pre_llaye.getBounds());
            $("#line" + id).addClass('bg-ch');
            pre_id = id;
            pre_llayer=true
@@ -943,6 +947,7 @@ function getLine(id){
            pre_llayer=false;
            if(id!=pre_id){
              pre_llaye= L.geoJson(JSON.parse(parse_data[0].geojson), style).addTo(map);
+             map.fitBounds(pre_llaye.getBounds());
              $("#line" + id).addClass('bg-ch');
              pre_id = id;
              pre_llayer=true
