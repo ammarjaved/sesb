@@ -420,21 +420,20 @@ var rentis_l = L.geoJson(null, {
                     <th class="text-center" >After Images</th>
                   </tr>
                   <tr>
-                    <td class="text-center"><a class='example-image-link text-center' href="${prop.before_pic1}" data-lightbox='example-set' data-title='Pic'><img src="${prop.before_pic1}" height="50" alt="no image uploaded" width="50"></a></td>
-                    <td class="text-center"><a class='example-image-link text-center' href="${prop.after_pic1}"  data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic1}" alt="no image uploaded" height="50" width="50"></a></td>
+                    <td class="text-center"><img onclick='openPanodata("${prop.before_pic1}")' src="${prop.before_pic1}" height="50" alt="no image uploaded" width="50"></td>
+                    <td class="text-center"><img onclick='openPanodata("${prop.after_pic1}")' src="${prop.after_pic1}" alt="no image uploaded" height="50" width="50"></td>
                   </tr>
 
                   <tr>
-                    <td class="text-center"><a class='example-image-link text-center' href="${prop.before_pic2}" data-lightbox='example-set' data-title='Pic'><img src="${prop.before_pic2}" height="50" alt="no image uploaded" width="50"></a></td>
-                    <td class="text-center"><a class='example-image-link text-center' href="${prop.after_pic2}"  data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic2}" alt="no image uploaded" height="50" width="50"></a></td>
+                   <td class="text-center"><img onclick='openPanodata("${prop.before_pic1}")' src="${prop.before_pic2}" height="50" alt="no image uploaded" width="50"></td>
+                    <td class="text-center"><img onclick='openPanodata("${prop.after_pic1}")' src="${prop.after_pic2}" alt="no image uploaded" height="50" width="50"></td>
                   </tr>
 
 
                   <tr>
                     
-                    <td class="text-center col-md-6"><a class='example-image-link text-center' href="${prop.before_pic3}" data-lightbox='example-set' data-title='Pic'><img src="${prop.before_pic3}" height="50" alt="no image uploaded" width="50"></a></td>
-                    <td class="text-center col-md-6"><a class='example-image-link text-center' href="${prop.after_pic3}"  data-lightbox='example-set' data-title='Pic'><img src="${prop.after_pic3}" height="50" alt="no image uploaded" width="50"></a></td>
-
+ <td class="text-center"><img onclick='openPanodata("${prop.before_pic1}")' src="${prop.before_pic3}" height="50" alt="no image uploaded" width="50"></td>
+                    <td class="text-center"><img onclick='openPanodata("${prop.after_pic1}")' src="${prop.after_pic3git }" alt="no image uploaded" height="50" width="50"></td>
                   </tr>
                  
                   </tbody></table>`;
@@ -503,7 +502,7 @@ function calltopBarSelect(){
 function topBarSelect() {
   var val;
   var style={
-    color:"#12E41D"
+    color:"#e4da12"
   }
 if (topB) {
   map.removeLayer(topB);
@@ -1334,3 +1333,91 @@ function searchButton(){
                 }
             });
 }
+
+function preNext(status){
+  $("#wg").html('');
+  $.ajax({
+    url: 'services/pre_next.php?id='+selectedId+'&st='+status,
+    dataType: 'JSON',
+    //data: data,
+    method: 'GET',
+    async: false,
+    success: function callback(data) {
+
+      //  alert(data
+      var str='<div id="window1" class="window">' +
+          '<div class="green">' +
+          '<p class="windowTitle">Pano Images</p>' +
+          '</div>' +
+          '<div class="mainWindow">' +
+          // '<canvas id="canvas" width="400" height="480">' +
+          // '</canvas>' +
+          '<div id="panorama" width="400px" height="480px"></div>'+
+          '<div class="row"><button style="margin-left: 30%;" onclick=preNext("pre") class="btn btn-success">Previous</button><button  onclick=preNext("next")  style="float: right;margin-right: 35%;" class="btn btn-success">Next</button></div>'
+      '</div>' +
+      '</div>'
+
+      $("#wg").html(str);
+
+      createWindow(1);
+      console.log(data)
+      // var canvas = document.getElementById('canvas');
+      // var context = canvas.getContext('2d');
+      // context.clearRect(0,0 ,canvas.width,canvas.height)
+      //     img.src = data.features[0].properties.image_path;
+      //     init_pano('canvas')
+      // setTimeout(function () {
+      //     init_pano('canvas')
+      // },1000)=
+      selectedId=data[0].gid
+      pannellum.viewer('panorama', {
+        "type": "equirectangular",
+        "panorama": data[0].photo,
+        "compass": true,
+        "autoLoad": true
+      });
+
+      if(identifyme!=''){
+        map.removeLayer(identifyme)
+      }
+      identifyme = L.geoJSON(JSON.parse(data[0].geom)).addTo(map);
+
+
+    }
+  });
+
+}
+
+
+function openPanodata(image) {
+  featureModal
+  $('#featureModal').modal('hide');
+
+    $("#wg").html('');
+
+        var str='<div id="window1" class="window">' +
+            '<div class="green">' +
+            '<p class="windowTitle">Pano Images</p>' +
+            '</div>' +
+            '<div class="mainWindow">' +
+            // '<canvas id="canvas" width="400" height="480">' +
+            // '</canvas>' +
+            '<div id="panorama" width="400px" height="480px"></div>'+
+            '<div class="row"><button style="margin-left: 30%;" onclick=preNext("pre") class="btn btn-success">Previous</button><button  onclick=preNext("next")  style="float: right;margin-right: 35%;" class="btn btn-success">Next</button></div>'
+
+        '</div>' +
+        '</div>'
+
+        $("#wg").html(str);
+        createWindow(1);
+          pannellum.viewer('panorama', {
+            "type": "equirectangular",
+            "panorama": image,
+            "compass": true,
+            "autoLoad": true
+          });
+
+
+
+}
+
