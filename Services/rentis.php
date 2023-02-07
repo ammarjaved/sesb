@@ -29,7 +29,7 @@ class getRentis extends Connection
 					( 
 					select g.* from rentis g,foo  where segment ='$name' and cycle='$cycle' and g.id=foo.id 
 					) b	where a.name ilike '%$fname[0]%'";
-
+					
 				try{
 				$result = 	pg_query( $sql1);
 				$res2    =  pg_fetch_all($result);
@@ -39,6 +39,8 @@ class getRentis extends Connection
 				$result2 = pg_query($sql2);
 
 				$res['data'] = pg_fetch_all($result2);
+
+				
 				
 				}catch(Exception $e){
 					$res = "failed";

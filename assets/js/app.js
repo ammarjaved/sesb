@@ -988,22 +988,27 @@ function sideRentis(name){
     type:'GET',
     url:`Services/cycle.php?name=${name}`,
     success:function(data){
-      console.log(data);
+      
      
       var dat = JSON.parse(data);
-      g_dat = dat;
+      var cycle = dat.cycle;
+      g_dat = cycle;
 
       $("#Rentis").html(`<select name="select_cycle" id="select_cycle" onchange="getRentis('${side_name}')" class="form-control">
                       <option value="" hidden>Select cycle</option>
                      
                       </select>`);
       
-      for(var i = 0 ; i<dat.length ;i++){
-        
-      $("#select_cycle").append(`<option value=${dat[i].cycle}>${dat[i].cycle}</option>`);
+      for(var i = 0 ; i<cycle.length ;i++){     
+        $("#select_cycle").append(`<option value=${cycle[i].cycle}>${cycle[i].cycle}</option>`);
+      }
 
-
-    }
+      
+      if (rentis_l) {
+        map.removeLayer(rentis_l);
+      }
+      rentis_l.clearLayers();
+      rentis_l.addData(JSON.parse(dat.rentis[0].geojson)).addTo(map) ;
 
   }
 })
@@ -1014,14 +1019,10 @@ var rentis = '';
 var rentis_name = '';
 var cycle = '';
 function getRentis(name) {
-  // if (rentis_name === name) {
-  //   return false;
-  // } 
+
 
   cycle = $('#select_cycle').val();
-  // console.log(cycle);
-  // console.log(cycle);
-  // alert(cycle);
+
   $.ajax({
     type:'GET',
     url:`Services/rentis.php?name=${name}&cycle=${cycle}`,
@@ -1202,123 +1203,6 @@ function typeaheadsearch(){
        
     }
 
-// var substringMatcher = function(strs) {
-//   return function findMatches(q, cb) {
-//     var matches, substringRegex;
-
-//     // an array that will be populated with substring matches
-//     matches = [];
-
-//     // regex used to determine if a string contains the substring `q`
-//     substrRegex = new RegExp(q, 'i');
-
-//     // iterate through the pool of strings and for any string that
-//     // contains the substring `q`, add it to the `matches` array
-//     $.each(strs, function(i, str) {
-//       if (substrRegex.test(str)) {
-//         matches.push(str);
-//       }
-//     });
-
-//     cb(matches);
-//   };
-// };
-
-// var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
-//   'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',
-//   'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
-//   'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
-//   'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
-//   'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
-//   'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
-//   'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
-//   'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
-// ];
-
-// $('#the-basics .typeahead').typeahead({
-//   hint: true,
-//   highlight: true,
-//   minLength: 1
-// },
-// {
-//   name: 'states',
-//   source: substringMatcher(states)
-// });
-
-
-
-// var substringMatcher = function(strs) {
-//   console.log('strs', strs);
-//   return function findMatches(q, cb) {
-//     console.log('q', q);
-//     var matches, substringRegex;
-
-//     // an array that will be populated with substring matches
-//     matches = [];
-//     console.log('matches', matches);
-
-//     // regex used to determine if a string contains the substring `q`
-//     substrRegex = new RegExp(q, 'i');
-
-//     // iterate through the pool of strings and for any string that
-//     // contains the substring `q`, add it to the `matches` array
-//     $.each(strs, function(i, str) {
-//       if (substrRegex.test(str)) {
-//         matches.push(str);
-//       }
-//     });
-    
-//     console.log('matches', matches);
-
-//     cb(matches);
-//   };
-// };
-
-// var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
-//   'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',
-//   'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
-//   'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
-//   'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
-//   'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
-//   'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
-//   'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
-//   'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
-// ];
-
-// $('#the-basics .typeahead').typeahead({
-//   hint: true,
-//   highlight: true,
-//   minLength: 1
-// },
-// {
-//   name: 'states',
-//   source: substringMatcher(states)
-// });
-
-
-
-// $(document).ready(function(){
-//     // Defining the local dataset
-//     var cars = ['Audi', 'BMW', 'Bugatti', 'Ferrari', 'Ford', 'Lamborghini', 'Mercedes Benz', 'Porsche', 'Rolls-Royce', 'Volkswagen'];
-    
-//     // Constructing the suggestion engine
-//     var cars = new Bloodhound({
-//         datumTokenizer: Bloodhound.tokenizers.whitespace,
-//         queryTokenizer: Bloodhound.tokenizers.whitespace,
-//         local: cars
-//     });
-    
-//     // Initializing the typeahead
-//     $('.typeahead').typeahead({
-//         hint: true,
-//         highlight: true, /* Enable substring highlighting */
-//         minLength: 1 /* Specify minimum characters required for showing result */
-//     },
-//     {
-//         name: 'cars',
-//         source: cars
-//     });
-// });  
 
 
 $(document).ready(function(){
