@@ -417,30 +417,53 @@ var rentis_l = L.geoJson(null, {
                     <td>${parseInt(prop.lenght)} (KM)</td>
                   </tr>
                   <tr>
+                  <th class="text-center"><button type="button" class="btn btn-sm btn-primary" onclick="imgPre('two-d')">View Image as 2D</button></th>
+                  <th class="text-center"><button type="button" class="btn btn-sm btn-primary" onclick="imgPre('three60')">View Image as 360</button></th>
+                  </tr>
+                  <tr>
                     <th class="text-center">Before Images </th>
                     <th class="text-center" >After Images</th>
                   </tr>
-                  <tr>
+
+                  <tr class="three60" >
                     <td class="text-center"><img onclick='openPanodata("${prop.before_pic1}")' src="${prop.before_pic1}" height="50"  alt="NO Image Required" width="50"></td>
                     <td class="text-center"><div id="set_con1"><img onclick='openPanodata("${prop.after_pic1}")' src="${prop.after_pic1}" alt="NO Image Required" onerror="this.src='assets/img/no_image.jpg'" height="50" width="50"></div></td>
                   </tr>
 
-                  <tr>
+                  <tr class="three60" >
                    <td class="text-center"><img onclick='openPanodata("${prop.before_pic2}")' src="${prop.before_pic2}" height="50" alt="NO Image Required" width="50"></td>
                     <td class="text-center"><div id="set_con2"><img onclick='openPanodata("${prop.after_pic2}")' src="${prop.after_pic2}" alt="NO Image Required" height="50" onerror="this.src='assets/img/no_image.jpg'" width="50"></div></td>
                   </tr>
 
 
-                  <tr>
-                    
- <td class="text-center"><img onclick='openPanodata("${prop.before_pic3}")' src="${prop.before_pic3}" height="50" alt="NO Image Required" width="50"></td>
+                  <tr class="three60" >        
+                    <td class="text-center"><img onclick='openPanodata("${prop.before_pic3}")' src="${prop.before_pic3}" height="50" alt="NO Image Required" width="50"></td>
                     <td class="text-center"><div id="set_con3"><img onclick='openPanodata("${prop.after_pic3}")' src="${prop.after_pic3}" alt="NO Image Required" onerror="this.src='assets/img/no_image.jpg'" height="50" width="50"></div></td>
                   </tr>
+
+
+                  <tr class="two-d">
+                    <td class="text-center"><a class="example-image-link" href="${prop.before_pic1}" data-lightbox="example-set" data-title="Before Image 1 "><img  src="${prop.before_pic1}" height="50"  alt="NO Image Required" width="50"></a></td>
+                    <td class="text-center"><a class="example-image-link" href="${prop.after_pic1}" data-lightbox="example-set" data-title="After Image 1 "><img  src="${prop.after_pic1}" alt="NO Image Required" height="50" width="50"></a></td>
+                  </tr>
+
+                  <tr class="two-d">
+                   <td class="text-center"><a class="example-image-link" href="${prop.before_pic2}" data-lightbox="example-set" data-title="Before Image 2 "><img  src="${prop.before_pic2}" height="50" alt="NO Image Required" width="50"></a></td>
+                    <td class="text-center"><a class="example-image-link" href="${prop.after_pic2}" data-lightbox="example-set" data-title="After Image 2 "><img  src="${prop.after_pic2}" alt="NO Image Required" height="50"  width="50"></a></td>
+                  </tr>
+
+
+                  <tr class="two-d">        
+                    <td class="text-center"><a class="example-image-link" href="${prop.before_pic3}" data-lightbox="example-set" data-title="Before Image 3 "><img src="${prop.before_pic3}" height="50" alt="NO Image Required" width="50"></a></td>
+                    <td class="text-center"><a class="example-image-link" href="${prop.after_pic3}" data-lightbox="example-set" data-title="After Image 3 "><img  src="${prop.after_pic3}" alt="NO Image Required"  height="50" width="50"></a></td>
+                  </tr>
                  
-                  </tbody></table>`;
+                  </tbody>
+                  </table>`;
                   $("#feature-title").html("Rentis Detail");
         $("#feature-info").html(content);
         $("#featureModal").modal("show");
+        imgPre('two-d');
         setTimeout(function(){
 
                   if(prop.already_cleaned === "false"){
@@ -1212,6 +1235,8 @@ $(document).ready(function(){
                 remote:'services/search.php?key=%QUERY',
                 limit: 5
             }); 
+
+
 })
 
 
@@ -1286,6 +1311,24 @@ function preNext(status){
 
     }
   });
+
+}
+
+
+
+function imgPre(name) {
+
+ 
+ if (name === "three60") {
+ 
+  $('.three60').show();
+  $('.two-d').hide();
+  
+ } else{
+  
+  $('.three60').hide();
+  $('.two-d').show();
+   }
 
 }
 
