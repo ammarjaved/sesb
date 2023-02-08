@@ -1415,15 +1415,57 @@
                   </table>
 
                   <hr>
-                  <li onclick="toggleDiv('Rentis')"><i class="fa fa-plus" id="Rentis_i"></i> Rentis Management</li>
-                <div id="Rentis" style="display:none;">
+                  <li onclick="toggleDiv('Rentiss')"><i class="fa fa-plus" id="Rentiss_i"></i> Rentis Management</li>
+                <div id="Rentiss" style="display:none;">
+                  <table class="table table-striped table-bordered table-condensed custom-table-css" style="margin-left: 10px;width: 80%; ">
+                    <tr>
+                      <th class="col-md-6">cycle 1 </th>
+                      <td class="col-md-6"><div style="height: 7px;width: 7px; background: #b7ffd4; margin-left: 50%;margin-top: 8%;"></div></td>
+                    </tr>
+                    <tr>
+                      <th class="col-md-6">cycle 2 </th>
+                      <td class="col-md-6"><div style="height: 7px;width: 7px; background: #42bc75; margin-left: 50%;margin-top: 8%;"></div></td>
+                    </tr>
+                    <tr>
+                      <th class="col-md-6">cycle 3 </th>
+                      <td class="col-md-6"><div style="height: 7px;width: 7px; background: #226840; margin-left: 50%;margin-top: 8%;"></div></td>
+                    </tr>
+                  </table>
+                  <div id="Rentis">
                  
                   </div>
+                  </div>
                   <li onclick="toggleDiv('gen_report')"><i class="fa fa-plus" id="gen_report_i"></i> Generate Report</li>
-                  <ul style="margin-left: 20px;display: none;" id="gen_report">
-                  <li onclick="toggleDivp('seg')"><i class="fa fa-plus" id="repo_seg_i"></i> Report By Segment</li>
-                  <li onclick="toggleDivp('ven')"><i class="fa fa-plus" id="repo_ven_i"></i> Report By Vendor</li>
-                  <li onclick="toggleDivp('pay')"><i class="fa fa-plus" id="repo_pay_i"></i> Report By Payment</li>
+                  <ul style="margin-left: 20px;display: none; margin-bottom: 20%;" id="gen_report">
+
+                  <li onclick="toggleDivp('seg')"><i class="fa fa-plus" id="seg_i"></i> Report By Segment</li>
+
+                  <table class="table table-striped table-bordered table-condensed custom-table-css" id="seg" style="display:none;margin-left: 10px;width: 80%; ">
+                    <tr>
+                      <th>PDF</th>
+                      <td><a href="/sesb/assets/PMU BUKIT RAMBAI-Model.pdf" class="btn btn-primary btn-sm" target="_blank">Download</a></td>
+                    </tr>
+                  </table>
+                  <li onclick="toggleDivp('ven')"><i class="fa fa-plus" id="ven_i"></i> Report By Vendor</li>
+
+                  <table class="table table-striped table-bordered table-condensed custom-table-css" id="ven" style="display:none;margin-left: 10px;width: 80%; ">
+                    <tr>
+                      <th>PDF</th>
+                      <td><a href="/sesb/assets/PMU BUKIT RAMBAI-Model.pdf" class="btn btn-primary btn-sm" target="_blank">Download</a></td>
+                    </tr>
+                  </table>
+
+
+                  <li onclick="toggleDivp('pay')"><i class="fa fa-plus" id="pay_i"></i> Report By Payment</li>
+
+                  <table class="table table-striped table-bordered table-condensed custom-table-css" id="pay" style="display:none;margin-left: 10px;width: 80%; ">
+                    <tr>
+                      <th>PDF</th>
+                      <td><a href="/sesb/assets/PMU BUKIT RAMBAI-Model.pdf" class="btn btn-primary btn-sm" target="_blank">Download</a></td>
+                    </tr>
+                  </table>
+
+
                   </ul>
                 </ul>
                 <!-- <table class="table table-striped table-bordered table-condensed">

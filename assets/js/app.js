@@ -270,7 +270,7 @@ var poles = L.geoJson(null, {
       var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>gid</th><td>" + feature.properties.gid+ "</td></tr>"+"<tr><th>Name</th><td>" + feature.properties.name+ "</td></tr>" + "<tr><th>Tower no</th><td>" + feature.properties.tower_no + "</td></tr>" + "<tr><th>Type</th><td>" + feature.properties.type + "</td></tr>" + "<table>";
       layer.on({
         click: function (e) {
-           console.log(feature);
+           // console.log(feature);
           $("#feature-title").html(feature.properties.NAME);
           $("#feature-info").html(content);
           $("#featureModal").modal("show");
@@ -337,7 +337,7 @@ var pmu_ppu = L.geoJson(null, {
                 type: "GET",
                 url: `Services/getConnectedLayer.php?id=${feature.properties.gid }`,
                 success: function(data) {
-                  console.log(data.geojson);
+                  // console.log(data.geojson);
                   var  tkk =  JSON.parse(data);
                   // console.log(tkk[0].geojson);
                   var tkk_j = JSON.parse(tkk[0].geojson)
@@ -377,9 +377,81 @@ var rentisMarkerOptions = {
   opacity: 1,
   fillOpacity: 0.8
 };
+
+var rentisMarkerOptions3 = {
+  radius: 4,
+  fillColor: "#226840",
+  color: "#000",
+  weight: 1,
+  opacity: 1,
+  fillOpacity: 0.8
+};
+
+var rentisMarkerOptions2 = {
+  radius: 4,
+  fillColor: "#42bc75",
+  color: "#000",
+  weight: 1,
+  opacity: 1,
+  fillOpacity: 0.8
+};
+
+var rentisMarkerOptions1 = {
+  radius: 4,
+  fillColor: "#b7ffd4",
+  color: "#000",
+  weight: 1,
+  opacity: 1,
+  fillOpacity: 0.8
+};
+
+
+var ch_num = '';
 var rentis_l = L.geoJson(null, {
   pointToLayer: function (feature, latlng) {
-    return L.circleMarker(latlng, rentisMarkerOptions);
+
+
+    var feat = parseInt(feature.properties.cycle);
+    ch_num = feat;
+    
+      // console.log( feat);
+      if (ch_num == 3) {
+
+        return L.circleMarker(latlng, rentisMarkerOptions3);
+      }
+
+      if (ch_num == 2) {
+
+        return L.circleMarker(latlng, rentisMarkerOptions2);
+      }
+
+      if (ch_num == 1) {
+
+        return L.circleMarker(latlng, rentisMarkerOptions1);
+      }
+
+// return L.circleMarker(latlng);
+    //   switch(feat){
+    //   case 3:
+    //     console.log("3");
+    //     // return L.circleMarker(latlng, rentisMarkerOptions);
+    //   break;
+    //   case 2:
+    //     console.log("2");
+    //     // return L.circleMarker(latlng, rentisMarkerOptions);
+    //   break;
+    //   case 1:
+    //     console.log("1");
+    //     // return L.circleMarker(latlng, rentisMarkerOptions);
+    //   break;
+    // default:
+
+    //     console.log("f");
+    //     // return L.circleMarker(latlng, rentisMarkerOptions);
+    //   break;
+    //   }
+   
+    
   },
   onEachFeature: function (feature, layer) {
     if (feature.properties) {
@@ -491,7 +563,7 @@ var rentis_l = L.geoJson(null, {
 });
 
 $.getJSON("Services/rentis.php", function (data) {
-  console.log(data);
+  // console.log(data);
 
   rentis_l.addData(JSON.parse(data[0].geojson));
 });
